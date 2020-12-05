@@ -14,5 +14,4 @@ public class SamplePage {
     @FindBy(how = How.XPATH, using = "//div[@id='v-pills-tab']/select[1]/option")
     public static List<WebElement> jobFilterList;
 
-
 }
