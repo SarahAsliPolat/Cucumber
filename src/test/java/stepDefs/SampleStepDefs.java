@@ -47,17 +47,16 @@ public class SampleStepDefs {
     }
 
 
-
-    @Then("I wait for {string} to be {string}")
-    public void iWaitForToBe(String elementNm, String state) {
+    @Then("I wait for {string} to be clickable")
+    public void iWaitForToBeClickable(String elementNm) {
         WebElement waitElement = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), elementNm);
-        FluentWait<WebDriver> wait = new WebDriverWait(Driver.getDriver(), 6).
-                pollingEvery(Duration.ofSeconds(1))
-                .ignoring(NoSuchElementException.class);
-        if (state.equals("visible"))
-            wait.until(ExpectedConditions.visibilityOf(waitElement));
-        else
-            wait.until(ExpectedConditions.elementToBeClickable(waitElement));
+        WebElement wait = new WebDriverWait(Driver.getDriver(), 6).until(ExpectedConditions.elementToBeClickable(waitElement));
+    }
+
+    @Then("I wait for {string} to be visible")
+    public void iWaitForToBeVisible(String elementNm) {
+        WebElement waitElement = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), elementNm);
+        WebElement wait = new WebDriverWait(Driver.getDriver(), 6).until(ExpectedConditions.visibilityOf(waitElement));
     }
 
 
