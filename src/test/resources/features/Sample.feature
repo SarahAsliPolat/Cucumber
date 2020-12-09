@@ -1,4 +1,4 @@
-Feature: MCengiz tests
+Feature: Sample tests
 
   Background: User is logged in
     Given I am on the "LoginPage"

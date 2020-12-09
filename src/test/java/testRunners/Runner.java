@@ -9,7 +9,7 @@ import io.cucumber.testng.CucumberOptions;
 
         plugin = {"pretty", "json:target/cucumber.json",
                 "html:target/cucumber-html-reports"}
-        ,tags = {"@SDMA1"}
+        ,tags = {"@MCengiz"}
 
 
 )
