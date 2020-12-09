@@ -19,9 +19,9 @@ Feature: MCengiz tests
   Scenario: Validate job filter dropdown list
     Then I click on "JobFilter"
     Then I Validate the jobFilterList drop down list has these below
-      |-- Job --|
-      |CFO|
-      |Administrative Staff|
-      |IT Support|
+      | -- Job --            |
+      | CFO                  |
+      | Administrative Staff |
+      | IT Support           |
 
 
