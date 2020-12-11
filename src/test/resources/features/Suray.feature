@@ -16,8 +16,7 @@
 
     @tabs
   Scenario: Validate tabs
-    When the user on the "StaffList"
-    Then the user validats the basicTab in the right side of the page
+    Then the user validates the basicTab in the right side of the page
       |tabs         |
       |Basic        |
       |Details      |

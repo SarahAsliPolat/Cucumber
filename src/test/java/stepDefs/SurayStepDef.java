@@ -6,6 +6,7 @@ import Utilities.WebElementMgr;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -16,7 +17,7 @@ import java.util.List;
 public class SurayStepDef {
     @Given("I logged in Suray")
     public void iloggedInSurayPage() throws Exception{
-        PageObjectMgr.setCurrentPage ("SurayPage");
+        PageObjectMgr.setCurrentPage ("LoginPage");
         WebElement loadLogin= (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(),
                 "loadLogin");
         WebElement emailTextBox=(WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(),
@@ -44,19 +45,19 @@ public class SurayStepDef {
     }
 
 
-    @When("the user enter the login and password")
-    public void the_user_enter_the_login_and_password() {
-        // Write code here that ty ghurns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
 
-    @Then("the user validates the tabs available in the right side of the page")
-        public void the_user_validates_the_tabs_available_in_the_right_side_of_the_page(List<String> expectedList) throws Exception {
-            List <WebElement> actualList = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(),"jobFilterList" );
+    @Then("the user validates the basicTab in the right side of the page")
+    public void the_user_validates_the_basicTab_in_the_right_side_of_the_page(List<String> expectedList) throws Exception {
+        PageObjectMgr.setCurrentPage ("SurayPage");
+            List <WebElement> actualList = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(),"tabList" );
 
             String expectedValue;
             String actualValue;
 
-            throw new io.cucumber.java.PendingException();
+        for (int i = 0; i < actualList.size(); i++) {
+            actualValue=actualList.get(i).getText();
+            System.out.println("actualValue: "+actualValue);
+            Assert.assertTrue(expectedList.contains(actualValue));
+        }
     }
 }

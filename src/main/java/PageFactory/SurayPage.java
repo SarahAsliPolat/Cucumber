@@ -21,4 +21,7 @@ public class SurayPage {
 
     @FindBy(how = How.XPATH, using = "//a[@data-toggle='tab'][4]")
     public static WebElement filesTab;
+
+    @FindBy(how = How.XPATH,using = "//a[@data-toggle='tab']")
+    public List<WebElement> tabList;
 }
