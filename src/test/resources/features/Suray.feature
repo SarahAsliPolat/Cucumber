@@ -17,7 +17,7 @@
     @tabs
   Scenario: Validate tabs
     Then the user validates the basicTab in the right side of the page
-      |tabs         |
+
       |Basic        |
       |Details      |
       |Attendance   |

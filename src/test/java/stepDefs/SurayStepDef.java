@@ -49,15 +49,21 @@ public class SurayStepDef {
     @Then("the user validates the basicTab in the right side of the page")
     public void the_user_validates_the_basicTab_in_the_right_side_of_the_page(List<String> expectedList) throws Exception {
         PageObjectMgr.setCurrentPage ("SurayPage");
-            List <WebElement> actualList = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(),"tabList" );
+            List <WebElement> actualList = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.
+                            getCurrentPage(), "tabList" );
 
-            String expectedValue;
+
             String actualValue;
+            if(actualList.size()==expectedList.size()){
+                for (int i = 0; i < actualList.size(); i++) {
+                    actualValue=actualList.get(i).getText();
+                    System.out.println("actualValue: "+actualValue);
+                    Assert.assertTrue(expectedList.contains(actualValue));
+            }
 
-        for (int i = 0; i < actualList.size(); i++) {
-            actualValue=actualList.get(i).getText();
-            System.out.println("actualValue: "+actualValue);
-            Assert.assertTrue(expectedList.contains(actualValue));
         }
+            else{
+                Assert.fail("list size are not same");
+            }
     }
 }
