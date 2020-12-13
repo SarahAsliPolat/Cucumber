@@ -23,4 +23,14 @@ public class EmrePage {
     @FindBy(how = How.XPATH, using = "//button[text()='New Hire']")
     public static WebElement newHireButton;
 
+    @FindBy(how = How.XPATH, using = "//input[@class='form-control m-1']")
+    public static WebElement searchBox;
+
+    @FindBy(how = How.XPATH, using = "//div[@class=\"card-body overflow-auto\"]/descendant::a[@class=\"nav-link\"]")
+    public static List<WebElement> searchResult;
+
+
+
+
+
 }
