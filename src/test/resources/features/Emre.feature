@@ -4,6 +4,9 @@ Feature: Emre tests
     Given I logged in Emre
 
     @Emre
-    Scenario: Emre test
-      When I click on "newHireButton" as Emre
-      Then I wait for "3000" milliseconds
+    Scenario: Validate Search Box
+      When I type "al" in "searchBox"
+      Then I wait for "1000" milliseconds
+      Then I get the "searchResult" as a list
+
+
