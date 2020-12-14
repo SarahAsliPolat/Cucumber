@@ -41,7 +41,6 @@ public class MCengizStepdefs {
     @When("I click on {string} as MCengiz")
     public void iClickOnAsMCengiz(String element) {
         WebElement ClickElement=  (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), element);
-
         ClickElement.click();
     }
 }
