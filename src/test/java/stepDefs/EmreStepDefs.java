@@ -68,22 +68,21 @@ public class EmreStepDefs {
 
     }
 
-    @Then("I get the {string} as a list")
-    public void iGetTheAsAList(String value) throws Exception {
-        List<WebElement> searchResult = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(),value);
+    @Then("I get the {string} as a list and validate")
+    public void iGetTheAsAListAndValidate(String value) throws Exception {
+        List<WebElement> searchResult = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), value);
 
         String expectedValue;
 
-        for (int i = 0; i < searchResult.size() ; i++) {
+        for (int i = 0; i < searchResult.size(); i++) {
             expectedValue = searchResult.get(i).getText().toLowerCase();
 
             if (!expectedValue.contains(tempInput)) {
                 throw new Exception("Fail; \n Expected: " + tempInput + " \n Found : " + expectedValue);
-            }
-            else{
+            } else {
                 System.out.println("Pass; \n Expected: " + tempInput + " \n Found : " + searchResult.get(i).getText());
             }
         }
-        System.out.println("Total number of search results: "+searchResult.size());
+        System.out.println("Total number of search results: " + searchResult.size());
     }
 }
