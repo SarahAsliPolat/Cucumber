@@ -68,6 +68,5 @@ public class GulshatPage {
     @FindBy(xpath = "//label[contains(text(),'Race:')]")
     public static WebElement race;
 
-//    @FindBy(xpath = "//a[contains(text(),'Derek Parsons')]")
-//    public static WebElement person;
+
 }

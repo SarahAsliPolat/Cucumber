@@ -21,4 +21,5 @@ Feature: As an admin, when I click on Details tab,
     Then I verified that "placeOfBirth" element is exist with "Place of Birth:" text
     Then I verified that "countryOfOrigin" element is exist with "Country of Origin:" text
     Then I verified that "hispanic" element is exist with "Hispanic:" text
+
     Then I verified that "race" element is exist with "Race:" text

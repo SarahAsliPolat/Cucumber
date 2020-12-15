@@ -82,8 +82,6 @@ public class GulshatStepDef {
         if (!expected.equalsIgnoreCase(label)) {
             throw new Exception("field name does not match");
         }
-
-
     }
 }
 
