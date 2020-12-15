@@ -7,7 +7,9 @@ import io.cucumber.testng.CucumberOptions;
         glue = {"stepDefs"},
         plugin = {"pretty", "json:target/cucumber.json",
                 "html:target/cucumber-html-reports"}
-        ,tags = {"@MCengiz"}
+
+        ,tags = {"@SDMA1"}
+
 
 )
 public class Runner extends AbstractTestNGCucumberTests {
