@@ -3,6 +3,8 @@
 Java version:11+<br>
 Maven version: 3.6.3<br>
 Git version 2.23.0 or higher<br>
+Intellij Plugins: Cucumber for Java
+                  Gherkin
 
 ### Project settings: To generate cummumber-html-report suscesully make sure you have have the below settings:
 
