@@ -38,11 +38,6 @@ public class EmreStepDefs {
         ScenarioManager.getScenario().write("I logged in");
     }
 
-    @When("I run the test")
-    public void iRunTheTest() {
-
-    }
-
     @When("I click on {string} as Emre")
     public void iClickOnAsEmre(String element) {
         WebElement clickElement = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), element);
