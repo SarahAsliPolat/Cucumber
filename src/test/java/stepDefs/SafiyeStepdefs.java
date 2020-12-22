@@ -40,8 +40,8 @@ public class SafiyeStepdefs {
 
 
     @When("I click on {string} as Safiye")
-    public void clickTerminationButton(String terminationButton) {
-        WebElement clickElement = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), "terminationButton");
+    public void clickButton(String element) {
+        WebElement clickElement = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), "element");
         clickElement.click();
     }
 
