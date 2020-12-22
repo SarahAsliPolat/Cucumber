@@ -1,6 +1,9 @@
 package PageFactory;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
@@ -28,4 +31,16 @@ public class IsmailPage {
 
     @FindBy( xpath = "//*[@id='newHireForm']/div/div/label")
     public static List<WebElement> Texts;
+
+
+    @FindBy( xpath = "//select[1]")
+    public static WebElement jobTap;
+
+
+    @FindBy( xpath = "//select[1]/option")
+    public static List<WebElement> jobDropDownText;
+
+
+
+
 }

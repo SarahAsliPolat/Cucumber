@@ -5,6 +5,7 @@ import Utilities.Driver;
 import Utilities.PageObjectMgr;
 import Utilities.ScenarioManager;
 import Utilities.WebElementMgr;
+import com.google.gson.internal.bind.util.ISO8601Utils;
 import io.cucumber.java.an.E;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -16,6 +17,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.w3c.dom.ls.LSOutput;
 
 import java.time.Duration;
 import java.util.List;
@@ -77,8 +79,8 @@ public class ismailStepdef {
         Thread.sleep(Long.parseLong(waitTime));
         ScenarioManager.getScenario().write("Waited for " + waitTime + " milliseconds");
     }
-    @Then("I Validate the jobFilterList drop down list has these below as ismail")
-    public void i_Validate_the_jobFilterList_drop_down_list_has_these_below_as_ismail(List<String> expectedList ) throws Exception {
+    @Then("I Validate the newhire list has these below as ismail")
+    public void i_Validate_the_jobFilterList_drop_down_list_has_these_below_as_ismail(List<String> expectedList ) throws Exception{
         List<WebElement> actualList = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(),"Texts" );
 
         String expectedValue;
@@ -86,7 +88,9 @@ public class ismailStepdef {
 
         for (int i = 0; i < expectedList.size() ; i++) {
             expectedValue = expectedList.get(i);
+
             actualValue = actualList.get(i).getText();
+            System.out.println("expected values: "+expectedValue+" actual values: "+actualValue);
             if (!actualValue.equals(expectedValue)) {
                 throw new Exception(" Fail; \n Expected: " + expectedValue + " \n Found : " + actualValue);
             }
@@ -94,4 +98,25 @@ public class ismailStepdef {
 
     }
 
+    @Then("I Validate the dropDown job list down list has these below as ismail")
+    public void iValidateTheDropDownJobListDownListHasTheseBelowAsIsmail(List<String> expectedList )  throws Exception {
+        List<WebElement> actualList = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), "jobDropDownText");
+
+        String expectedValue;
+        String actualValue;
+
+        for (int i = 0; i < expectedList.size(); i++) {
+            expectedValue = expectedList.get(i);
+
+            actualValue = actualList.get(i).getText();
+            System.out.println("expected values: "+i + expectedValue + " actual values: "+i + actualValue);
+            if(actualValue.equals("")){
+                continue;
+            }
+            else if (!actualValue.equals(expectedValue)) {
+                throw new Exception(" Fail; \n Expected: " + expectedValue + " \n Found : " + actualValue);
+            }
+
+        }
+    }
 }
