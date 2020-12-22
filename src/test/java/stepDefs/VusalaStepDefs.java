@@ -45,10 +45,6 @@ public class VusalaStepDefs {
 
     }
 
-    @When("I run the test")
-    public void iRunTheTest() {
-    }
-
     @When("I click on {string} as Vusala")
     public void iClickOnAsVusala(String element) {
 
@@ -57,14 +53,6 @@ public class VusalaStepDefs {
 
         ClickElement.click();
 
-    }
-
-   @Then("I clicked on {string}")
-    public void iClickedOn(String element) {
-        WebElement ClickElement = (WebElement) WebElementMgr.
-               getWebElement(PageObjectMgr.getCurrentPage(),element);
-
-       ClickElement.click();
     }
 
     @And("I validate {string} message is displayed")
