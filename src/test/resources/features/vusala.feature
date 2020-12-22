@@ -10,7 +10,7 @@ Feature: As an admin, when I click on New Hire button,
   Scenario: Vusala test
     When I click on "newHireButton" as Vusala
     And I wait for "500" milliseconds
-    Then I clicked on "saveButton"
+    Then I click on "saveButton" as Vusala
     And I wait for "500" milliseconds
     And I validate "The salutation field is required." message is displayed
     And I validate "The first name field is required." message is displayed

@@ -21,7 +21,6 @@ public class VusalaPage {
     @FindBy(how = How.XPATH, using = "//button[text()='New Hire']")
     public static WebElement newHireButton;
 
-
     @FindBy(how = How.XPATH, using = "//button[contains(text(),'Save')]")
     public static WebElement saveButton;
 
