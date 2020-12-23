@@ -119,4 +119,22 @@ public class ismailStepdef {
 
         }
     }
+
+    @Then("I Validate the applicationField list has these below as ismail")
+    public void iValidateTheApplicationFieldListHasTheseBelowAsIsmail(List<String> expectedList) throws Exception {
+        List<WebElement> actualList = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(),"applicationFileds" );
+
+        String expectedValue;
+        String actualValue;
+
+        for (int i = 0; i < expectedList.size() ; i++) {
+            expectedValue = expectedList.get(i);
+
+            actualValue = actualList.get(i).getAttribute("name");
+            System.out.println("expected values: "+expectedValue+" actual values: "+actualValue);
+            if (!actualValue.equals(expectedValue)) {
+                throw new Exception(" Fail; \n Expected: " + expectedValue + " \n Found : " + actualValue);
+            }
+        }
+    }
 }

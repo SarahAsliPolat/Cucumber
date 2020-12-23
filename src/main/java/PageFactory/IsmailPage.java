@@ -43,4 +43,15 @@ public class IsmailPage {
 
 
 
+
+    @FindBy( xpath = "//i[contains(text(),'record_voice_over')]")
+    public static WebElement applicationsTap;
+
+    @FindBy( xpath = "//h5")
+    public static WebElement applicationsText;
+
+
+    @FindBy( xpath = "//div[@class='card-header']/select")
+    public static List<WebElement> applicationFileds;
+
 }
