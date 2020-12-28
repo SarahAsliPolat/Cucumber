@@ -120,21 +120,48 @@ public class ismailStepdef {
         }
     }
 
-    @Then("I Validate the applicationField list has these below as ismail")
-    public void iValidateTheApplicationFieldListHasTheseBelowAsIsmail(List<String> expectedList) throws Exception {
-        List<WebElement> actualList = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(),"applicationFileds" );
 
-        String expectedValue;
-        String actualValue;
 
-        for (int i = 0; i < expectedList.size() ; i++) {
-            expectedValue = expectedList.get(i);
 
-            actualValue = actualList.get(i).getAttribute("name");
-            System.out.println("expected values: "+expectedValue+" actual values: "+actualValue);
-            if (!actualValue.equals(expectedValue)) {
-                throw new Exception(" Fail; \n Expected: " + expectedValue + " \n Found : " + actualValue);
-            }
-        }
+    @Then("make sure the selectposition function  is working properly")
+    public void makeSureTheSelectpositionFunctionIsWorkingProperly() throws Exception{
+        List<WebElement>positionList = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), "p1");
+        List<WebElement> identicalValue = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), "p2");
+
+
+
+        String pos=null;
+        String ido=null;
+        Thread.sleep(4000);
+        for (int i = 1; i <positionList.size() ; i++) {
+
+
+        positionList.get(i).click();
+            pos=positionList.get(i).getText();
+            Thread.sleep(4000);
+
+            for (int j = 0; j <identicalValue.size() ; j++) {
+
+
+                Thread.sleep(4000);
+           ido=identicalValue.get(j).getText();
+
+           if (!ido.equals(null)){
+               if (!ido.equals(pos)) {
+                   throw new Exception(" Fail; \n Expected: " + pos + " \n Found : " + ido);
+               }
+
+           }
+                else if (ido.equals(null)){
+                    pos=null;
+                    if (!ido.equals(pos)) {
+                        throw new Exception(" Fail; \n Expected: " + pos + " \n Found : " + ido);
+                    }
+
+                }
+       }
+
+   }
+
     }
 }

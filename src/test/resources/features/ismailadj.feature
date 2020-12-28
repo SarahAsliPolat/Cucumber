@@ -98,7 +98,8 @@ Feature: A description
     Scenario: checking the applications drop down
       Then I click on "applicationsTap" as ismail
       Then I wait for "applicationsText" to be "visible" as ismail
-      Then I Validate the applicationField list has these below as ismail
-      |location_id|
-      |position_type_id|
-      |status|
+      Then I click on "selectPositionFiled" as ismail
+     Then  make sure the selectposition function  is working properly
+
+
+
