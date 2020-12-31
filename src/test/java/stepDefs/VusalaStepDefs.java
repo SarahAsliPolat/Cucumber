@@ -12,7 +12,9 @@ import io.cucumber.java.en.When;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
@@ -28,28 +30,28 @@ public class VusalaStepDefs {
         WebElement passwordTextBox = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), "passwordSection");
         WebElement loginButton = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), "loginButton");
         WebElement newHire = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), "newHireButton");
-        WebElement saveBut = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), "saveButton");
+
 
         loadLogin.click();
-        Thread.sleep(1000);
+        Thread.sleep(500);
         emailTexBox.sendKeys("admin@staging-buffsci.org");
-        Thread.sleep(1000);
+        Thread.sleep(500);
         passwordTextBox.sendKeys("admin123test");
-        Thread.sleep(1000);
+        Thread.sleep(500);
         loginButton.click();
 
         WebElement wait = new WebDriverWait(Driver.getDriver(), 5)
                 .until(ExpectedConditions.visibilityOf(newHire));
         ScenarioManager.getScenario().write("I logged in");
 
-
     }
 
     @When("I click on {string} as Vusala")
     public void iClickOnAsVusala(String element) {
 
+
         WebElement ClickElement = (WebElement) WebElementMgr.
-                getWebElement(PageObjectMgr.getCurrentPage(),element);
+                getWebElement(PageObjectMgr.getCurrentPage(), element);
 
         ClickElement.click();
 
@@ -58,12 +60,53 @@ public class VusalaStepDefs {
     @And("I validate {string} message is displayed")
     public void iValidateMessageIsDisplayed(String message) throws Exception {
 
-        String locator="//*[contains(text(),'"+message+"')]";
+        String locator = "//*[contains(text(),'" + message + "')]";
 
-            String actual= driver.findElement(By.xpath(locator)).getText();
-            String expected=message;
-            Assert.assertEquals(actual,expected,"are not equal");
-        }
+        String actual = driver.findElement(By.xpath(locator)).getText();
+        Assert.assertEquals(actual, message, "are not equal");
+    }
 
+    @Then("I enter {string} in the {string} as Vusala")
+    public void iEnterInThe(String text, String element) {
+
+        WebElement enterText = (WebElement) WebElementMgr.
+                getWebElement(PageObjectMgr.getCurrentPage(), element);
+        enterText.sendKeys(text);
+    }
+
+    @Then("I select element from {string}")
+    public void iSelectElementFrom(String boxName) {
+        Select element = new Select(driver.
+                findElement(By.xpath("//label[contains(text(),'" + boxName + "')]/../select")));
+        element.selectByIndex(2);
 
     }
+
+    @And("I scroll and click to {string} as Vusala")
+    public void iScrollToAsVusala(String element) {
+        WebElement scrollElement = (WebElement) WebElementMgr.
+                getWebElement(PageObjectMgr.getCurrentPage(), element);
+        Actions built = new Actions(driver);
+        built.moveToElement(scrollElement).click().build().perform();
+
+    }
+
+
+    @Then("I validate {string} Pop-Up page displayed")
+    public void iValidatePopUpPageDisplayed(String element) throws Exception {
+        WebElement validateElement = (WebElement) WebElementMgr.
+                getWebElement(PageObjectMgr.getCurrentPage(), element);
+        Assert.assertTrue(validateElement.isDisplayed());
+    }
+
+    @And("I validate {string} toaster message is displayed")
+    public void iValidateToasterMessageIsDisplayed(String element) {
+
+        WebElement validateToaster = (WebElement) WebElementMgr.
+                getWebElement(PageObjectMgr.getCurrentPage(), element);
+        Assert.assertFalse(validateToaster.getText().isEmpty());
+    }
+
+
+}
+
