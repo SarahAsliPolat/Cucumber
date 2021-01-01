@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import java.util.List;
+
 public class GulshatPage {
 
     @FindBy(how = How.XPATH, using = "//div[@class='links']/a")
@@ -68,5 +70,17 @@ public class GulshatPage {
     @FindBy(xpath = "//label[contains(text(),'Race:')]")
     public static WebElement race;
 
+    //RT-13
+    @FindBy(xpath = "//select[1]")
+    public  static WebElement JobBox;
+
+    @FindBy( xpath = "//select[1]/option")
+    public static List<WebElement> positions;
+
+    @FindBy (css = "a.nav-link[href='#']")
+    public  static List<WebElement> staffMembers;
+
+    @FindBy(xpath = "//*[text()='Position:']/../div")//.form-control
+    public  static WebElement position;
 
 }
