@@ -23,7 +23,6 @@ Feature: As an admin, when I click on Details tab,
     Then I verified that "hispanic" element is exist with "Hispanic:" text
     Then I verified that "race" element is exist with "Race:" text
 
-
   @Gulshat
   Scenario: Validate Job box dropdown list
     Then I validate position filter is working

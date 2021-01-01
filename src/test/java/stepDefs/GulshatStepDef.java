@@ -103,7 +103,6 @@ public class GulshatStepDef {
                 Assert.assertEquals("position does not match with positions filter",expected,actual);
             }
 
-
         }
 
     }

@@ -83,5 +83,4 @@ public class GulshatPage {
     @FindBy(xpath = "//*[text()='Position:']/../div")//.form-control
     public  static WebElement position;
 
-
 }
