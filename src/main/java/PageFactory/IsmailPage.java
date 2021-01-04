@@ -41,6 +41,23 @@ public class IsmailPage {
     public static List<WebElement> jobDropDownText;
 
 
+    @FindBy( xpath = "//i[contains(text(),'record_voice_over')]")
+    public static WebElement applicationsTap;
+
+    @FindBy( xpath = "//h5")
+    public static WebElement applicationsText;
+
+    //new task
+    @FindBy( xpath = "//*[@id='root']/section/div/div/div/form/div/select[2]")
+    public static WebElement selectPositionFiled;
+
+    @FindBy( xpath = "//select[@class=\"filter ml-4\"][2]/option")
+    public static List<WebElement> p1;
+
+    @FindBy( xpath = "//tbody/tr/td[2]")
+    public static List<WebElement> p2;
+
+
 
 
 }
