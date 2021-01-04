@@ -28,7 +28,7 @@ Feature: A description
       |Cell Phone:|
 
 
-  @ismail
+
   Scenario: the second scenario
     Then I click on "jobTap" as ismail
     Then I Validate the dropDown job list down list has these below as ismail
@@ -38,7 +38,7 @@ Feature: A description
   |CFO|
   |Administrative Staff|
   |IT Support|
-  |          |
+   |          |
   |IT Specialist|
   |Teacher - SPED- (K-4)|
   |Teacher - Reading Specialist (K-4)|
@@ -93,3 +93,13 @@ Feature: A description
   | SPED Coordinator|
   | PSR Teacher (9-12)|
   |Teacher - Turkish|
+
+  @ismail
+    Scenario: checking the applications drop down
+      Then I click on "applicationsTap" as ismail
+      Then I wait for "applicationsText" to be "visible" as ismail
+      Then I click on "selectPositionFiled" as ismail
+     Then  make sure the selectposition function  is working properly
+
+
+
