@@ -43,26 +43,20 @@ public class GulshatStepDef {
 
     }
 
+//
+//    @When("I click on {string} as Gulshat")
+//    public void iClickOnAsGulshat(String element) {
+//
+//        WebElement clickElement = new WebDriverWait(Driver.getDriver(),
+//                6).until(ExpectedConditions.visibilityOf(GulshatPage.newHireButton));
+//    }
 
     @When("I click on {string} as Gulshat")
-    public void iClickOnAsGulshat(String element) {
-
-        WebElement clickElement = new WebDriverWait(Driver.getDriver(),
-                6).until(ExpectedConditions.visibilityOf(GulshatPage.newHireButton));
+    public void clickButton(String element) {
+        WebElement clickElement = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), element);
+        clickElement.click();
     }
 
-//    @Then("I verify value is as expected")
-//    public void iVerifyValueIsAsExpected() throws Exception {
-//        try {
-//            WebElement person = driver.findElement(By.xpath("//a[contains(text(),'Derek Parsons')]"));
-//            String actual = driver.findElement(By.xpath("//div[contains(text(),'08/15/2017')]")).getText();
-//            String expected = "08/15/2017";
-//            Assert.assertEquals(expected, actual);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            //throw new Exception("try again");
-//        }
-//    }
 
     @When("I click on {string} tab as Gulshat")
     public void iClickOnTabAsGulshat(String elementNm) {
@@ -71,6 +65,7 @@ public class GulshatStepDef {
 
     }
 
+    //RT-4
     @Then("I verified that {string} element is exist with {string} text")
     public void iVerifiedThatElementIsExistWithText(String elementNm, String expected) throws Exception {
         WebElement fields = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), elementNm);
@@ -83,7 +78,7 @@ public class GulshatStepDef {
 
     }
 
-
+    //RT-13
     @Then("I validate position filter is working")
     public void iValidatePositionFilterIsWorking() throws InterruptedException {
         String expected = "";
@@ -100,9 +95,26 @@ public class GulshatStepDef {
                 Thread.sleep(1000);
                 actual = position.getText();
                 System.out.println(expected + " as expected  " + actual + "   Actual");
-                Assert.assertEquals("position does not match with positions filter",expected,actual);
+                Assert.assertEquals("position does not match with positions filter", expected, actual);
             }
 
+        }
+
+    }
+
+    //RT-20
+    @Then("I validate the details below are present on the applicant information page")
+    public void iValidateTheDetailsBelowArePresentOnTheApplicantInformationPage(List<String> expectedList ) {
+        int i=0;
+
+        try{
+            for( i=0;i<expectedList.size();i++){
+                WebElement element=driver.findElement(By.xpath("//*[contains(text(),'"+expectedList.get(i)+"')]"));
+                System.out.println(element.getText());
+            }
+
+        }catch (Exception e){
+            Assert.fail(expectedList.get(i)+" is not present on the applicant information page");
         }
 
     }
