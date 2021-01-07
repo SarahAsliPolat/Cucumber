@@ -46,12 +46,16 @@ public class SurayStepDef {
 
 
     }
+    @Given("I set my page {string}")
+    public void i_set_my_page(String page) throws Exception {
+        PageObjectMgr.setCurrentPage (page);
 
+    }
 
 
     @Then("the user validates the basicTab in the right side of the page")
     public void the_user_validates_the_basicTab_in_the_right_side_of_the_page(List<String> expectedList) throws Exception {
-        PageObjectMgr.setCurrentPage ("SurayPage");
+
             List <WebElement> actualList = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.
                             getCurrentPage(), "tabList" );
 
@@ -69,21 +73,20 @@ public class SurayStepDef {
                 Assert.fail("list size are not same");
             }
     }
-    @When("the user clicks to applicants button")
-    public void the_user_clicks_to_applicants_button() throws Exception {
-        PageObjectMgr.setCurrentPage ("SurayPage");
-        WebElement applicants =(WebElement) WebElementMgr.getWebElement(PageObjectMgr.
-                getCurrentPage(), "applicants" );
-        applicants.click();
+
+
+    @When("the user clicks to {string}")
+    public void the_user_clicks_to(String elementName) {
+        WebElement element =(WebElement) WebElementMgr.getWebElement(PageObjectMgr.
+                getCurrentPage(), elementName );
+        element.click();
     }
     @Then("the user should see the  following columns")
     public void the_user_should_see_the_following_columns(List<String> expectedList) throws Exception {
-        PageObjectMgr.setCurrentPage ("SurayPage");
-        Thread.sleep(3000);
 
         List <WebElement> columnNames = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.
                 getCurrentPage(), "columns" );
-        
+
         System.out.println("column size: "+columnNames.size());
         for(int i=0;i<columnNames.size()-1;i++){
             System.out.println("column name: "+columnNames.get(i).getText());
