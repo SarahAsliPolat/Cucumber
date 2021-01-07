@@ -94,12 +94,29 @@ Feature: A description
   | PSR Teacher (9-12)|
   |Teacher - Turkish|
 
-  @ismail
+
     Scenario: checking the applications drop down
       Then I click on "applicationsTap" as ismail
       Then I wait for "applicationsText" to be "visible" as ismail
       Then I click on "selectPositionFiled" as ismail
      Then  make sure the selectposition function  is working properly
 
+
+  @ismail
+    # https://softinnovator.atlassian.net/browse/RT-24
+  Scenario: check the new position steps
+    Then I click on "position" as ismail
+    Then I click on "addNewButton" as ismail
+    Then I wait for "1000" milliseconds as ismail
+    Then i validate the New Position page pups up
+    |New Position|
+    Then i validate all the text on the position page
+    |Title|
+ | Assigned Staff|
+  |Position Type|
+  |Reports To   |
+  |Location|
+  |Supervisor|
+  |Posted|
 
 

@@ -59,5 +59,23 @@ public class IsmailPage {
 
 
 
+// user story N=RT_24
+
+    @FindBy( xpath = "//p[contains(text(),'Positions')]")
+    public static WebElement position;
+
+
+    @FindBy( xpath = "//a[contains(text(),'Add New')]")
+    public static WebElement addNewButton;
+
+
+    @FindBy( xpath = "//h4[contains(text(),'New Position')]")
+    public static WebElement newPostionpage;
+
+
+
+    @FindBy( xpath = "//div[@class=\"col-sm-6 mb-3\"]/label")
+    public static List<WebElement> ptextPositions;
+
 
 }
