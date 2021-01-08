@@ -4,7 +4,7 @@ Feature: As an admin, when I click on Details tab,
   Background: User is logged in
     Given I logged in Gulshat
 
-
+  #RT-4
   Scenario: Gulshat test
     When I click on "details" tab as Gulshat
     And I wait for "500" milliseconds
@@ -23,7 +23,24 @@ Feature: As an admin, when I click on Details tab,
     Then I verified that "hispanic" element is exist with "Hispanic:" text
     Then I verified that "race" element is exist with "Race:" text
 
-  @Gulshat
+  #RT-13
   Scenario: Validate Job box dropdown list
     Then I validate position filter is working
 
+  @Gulshat
+  Scenario:Validate Applicants sub-page and Edit button
+    When I click on "applicants" as Gulshat
+    And I wait for "300" milliseconds
+    Then I click on "edit" as Gulshat
+    Then I wait for "3000" milliseconds
+    Then I validate the details below are present on the applicant information page
+      | Applied At:         |
+      | Address:            |
+      | Email:              |
+      | Experience:         |
+      | Certifications:     |
+      | Resume / Documents: |
+      | Recent Updates:     |
+      | Updated At:         |
+      | Phone Number:       |
+      | Notes:              |

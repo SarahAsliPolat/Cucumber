@@ -80,7 +80,45 @@ public class GulshatPage {
     @FindBy (css = "a.nav-link[href='#']")
     public  static List<WebElement> staffMembers;
 
-    @FindBy(xpath = "//*[text()='Position:']/../div")//.form-control
+    @FindBy(xpath = "//*[text()='Position:']/../div")
     public  static WebElement position;
+
+
+    //RT-20
+    @FindBy(how = How.XPATH,using ="//p[normalize-space()='Applicants']" )
+    public static  WebElement applicants;
+
+    @FindBy(how = How.XPATH,using = "//div[@class='btn-group']")
+    public static WebElement edit;
+
+    @FindBy(how = How.XPATH,using = "//label[contains(text(),'Applied At:')]")
+    public static WebElement appliedAt;
+
+    @FindBy(how = How.XPATH,using = "//label[contains(text(),'Address:')]")
+    public static WebElement address;
+
+    @FindBy(how = How.XPATH,using = "//label[contains(text(),'Email:')]")
+    public  static WebElement email;
+
+    @FindBy(how=How.XPATH,using = "//label[contains(text(),'Experience:')]")
+    public static WebElement experience;
+
+    @FindBy(how=How.XPATH,using = "//label[contains(text(),'Certifications:')]")
+    public static WebElement certification;
+
+    @FindBy(how=How.XPATH,using = "//label[contains(text(),'Resume / Documents:')]")
+    public  static WebElement resumeDocuments;
+
+    @FindBy(how=How.XPATH,using = "//label[contains(text(),'Recent Updates:')]")
+    public static WebElement recentUpdates;
+
+    @FindBy(how = How.XPATH,using = "//label[contains(text(),'Updated At:')]")
+    public static WebElement updatedAt;
+
+    @FindBy(how = How.XPATH,using = "//label[contains(text(),'Phone Number:')]")
+    public static WebElement phoneNumber;
+
+    @FindBy(how=How.XPATH,using ="//label[contains(text(),'Notes:')]" )
+    public  static WebElement notes;
 
 }
