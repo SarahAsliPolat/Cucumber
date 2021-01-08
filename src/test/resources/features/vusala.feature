@@ -40,4 +40,13 @@ Scenario: Delete position
    And I wait for "200" milliseconds
    And I validate "Showing 0 to 0 of 0 entries (filtered from 202 total entries)" message is displayed
 
-
+@Vusala3 @RT-23
+Scenario: Remove filters
+  When I click on "Positions" as Vusala
+  Then I select element from "location"
+  Then I select element from "position"
+  Then I select element from "status"
+  When I click on "ClearFilters" as Vusala
+  Then I validate "- Select Location -" text is displayed in "location" dropDown list
+  Then I validate "- Select Position -" text is displayed in "position" dropDown list
+  Then I validate "- Select Status -" text is displayed in "status" dropDown list

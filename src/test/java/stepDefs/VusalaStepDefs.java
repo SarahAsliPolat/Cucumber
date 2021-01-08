@@ -1,6 +1,5 @@
 package stepDefs;
 
-import PageFactory.VusalaPage;
 import Utilities.Driver;
 import Utilities.PageObjectMgr;
 import Utilities.ScenarioManager;
@@ -17,6 +16,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.asserts.Assertion;
 
 public class VusalaStepDefs {
     WebDriver driver = Driver.getDriver();
@@ -76,9 +76,12 @@ public class VusalaStepDefs {
 
     @Then("I select element from {string}")
     public void iSelectElementFrom(String boxName) {
+        // String locator_Vusala2="//label[contains(text(),'" + boxName + "')]/../select";
+
+        String locator_Vusala3 = "//select[contains(@name,'" + boxName + "')]";
         Select element = new Select(driver.
-                findElement(By.xpath("//label[contains(text(),'" + boxName + "')]/../select")));
-        element.selectByIndex(2);
+                findElement(By.xpath(locator_Vusala3)));
+        element.selectByIndex(3);
 
     }
 
@@ -108,5 +111,13 @@ public class VusalaStepDefs {
     }
 
 
+    @Then("I validate {string} text is displayed in {string} dropDown list")
+    public void iValidateTextIsDisplayedInDropDownList(String text, String boxName) {
+        Select select = new Select(driver.findElement(By.xpath(" //select[contains(@name,'" + boxName + "')]")));
+        WebElement elm= select.getFirstSelectedOption();
+        String selectedOption = elm.getText();
+        Assert.assertEquals(selectedOption,text);
+        System.out.println("Selected element: " + selectedOption+" is visible");
+    }
 }
 

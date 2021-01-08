@@ -1,13 +1,8 @@
 package PageFactory;
 
-import Utilities.Driver;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
-import org.openqa.selenium.support.PageFactory;
-
-import java.util.List;
 
 public class VusalaPage {
 
@@ -35,6 +30,7 @@ public class VusalaPage {
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Add New')]")
     public static WebElement AddNew;
 
+
     @FindBy(how = How.XPATH, using =
       "//label[contains(text(),'Title')]//following::input")
     public static WebElement Title;
@@ -59,4 +55,8 @@ public class VusalaPage {
 
     @FindBy(how = How.XPATH, using = "//*[contains(text(),'Showing 0 to 0 of 0 entries (filtered from 202 total entries)')]")
     public static WebElement IsEmpty;
+
+
+    @FindBy(how = How.XPATH, using = "//a[contains(text(),'Clear Filters')]")
+   public static WebElement ClearFilters;
 }
