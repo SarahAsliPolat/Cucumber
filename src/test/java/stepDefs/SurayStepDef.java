@@ -53,12 +53,11 @@ public class SurayStepDef {
     }
 
 
-    @Then("the user validates the basicTab in the right side of the page")
-    public void the_user_validates_the_basicTab_in_the_right_side_of_the_page(List<String> expectedList) throws Exception {
+    @Then("the user validates that staff info tabs are on the staff page")
+        public void the_user_validates_that_staff_info_tabs_are_on_the_staff_page(List<String> expectedList)throws Exception{
 
             List <WebElement> actualList = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.
                             getCurrentPage(), "tabList" );
-
 
             String actualValue;
             if(actualList.size()==expectedList.size()){
