@@ -108,8 +108,7 @@ Feature: A description
     Then I click on "position" as ismail
     Then I click on "addNewButton" as ismail
     Then I wait for "1000" milliseconds as ismail
-    Then i validate the New Position page pups up
-    |New Position|
+    Then i validate the "New Position" page pups up
     Then i validate all the text on the position page
     |Title|
  | Assigned Staff|

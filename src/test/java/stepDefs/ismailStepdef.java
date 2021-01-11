@@ -161,14 +161,7 @@ public class ismailStepdef {
 
     }
 
-    @Then("i validate the New Position page pups up")
-    public void iValidateTheNewPositionPagePupsUp(String expected) throws Exception{
-        WebElement actualElement = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), "newPostionpage");
-        if (!actualElement.getText().equalsIgnoreCase(expected)){
-            throw new Exception("Fail; \n Expected :"+expected+" \n Found : "+actualElement.getText());
-        }
 
-    }
 
     @Then("i validate all the text on the position page")
     public void iValidateAllTheTextOnThePositionPage(List<String >ExpectedList) throws Exception{
@@ -186,6 +179,16 @@ public class ismailStepdef {
 
 
         }
+
+    }
+
+    @Then("i validate the {string} page pups up")
+    public void iValidateThePagePupsUp(String expected)throws Exception {
+        WebElement actualElement = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), "newPostionpage");
+        if (!actualElement.getText().equalsIgnoreCase(expected)){
+            throw new Exception("Fail; \n Expected :"+expected+" \n Found : "+actualElement.getText());
+        }
+
 
     }
 }
