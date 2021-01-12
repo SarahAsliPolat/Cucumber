@@ -53,10 +53,24 @@ public class VusalaPage {
     @FindBy(how = How.XPATH, using = "//label[contains(text(),'Search')]//following::input")
     public static WebElement Search;
 
-    @FindBy(how = How.XPATH, using = "//*[contains(text(),'Showing 0 to 0 of 0 entries (filtered from 202 total entries)')]")
+    @FindBy(how = How.XPATH, using = "//td[@class='dataTables_empty']")
     public static WebElement IsEmpty;
 
 
     @FindBy(how = How.XPATH, using = "//a[contains(text(),'Clear Filters')]")
    public static WebElement ClearFilters;
+
+
+    @FindBy(how = How.XPATH, using = "//a[@href='https://hr-testing.buffsci.org/applicants']")
+    public static WebElement Applicants;
+
+    @FindBy(how = How.XPATH, using = "//h5[contains(text(),'Applicants')]")
+    public static WebElement ApplicantsText;
+
+    @FindBy(how = How.XPATH, using = "//span[@class='brand-text font-weight-light']")
+    public static WebElement BuffsciTitle;
+
+    @FindBy(how = How.XPATH, using = "//i[@class='fa fa-users mr-1']//parent::h3")
+    public static WebElement StaffList;
+
 }

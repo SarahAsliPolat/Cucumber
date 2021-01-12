@@ -1,12 +1,10 @@
-Feature: As an admin, when I click on New Hire button,
-  in the New Hire window following fields should be mandatory: Salutation, First Name,
-  Last Name, Personal Email, and Cell Phone
+Feature: Vusala tests
 
   Background: user is logged in
     Given I logged in Vusala
 
 
-  @Vusala
+  @Vusala1 @RT-6
   Scenario: Vusala test
     When I click on "newHireButton" as Vusala
     And I wait for "200" milliseconds
@@ -18,7 +16,7 @@ Feature: As an admin, when I click on New Hire button,
     And I validate "The personal email must be a valid email address." message is displayed
     And I validate "The cell phone field is required." message is displayed
 
- @Vusala2
+ @Vusala2 @RT-12
 Scenario: Delete position
    When I click on "Positions" as Vusala
    Then I click on "AddNew" as Vusala
@@ -38,7 +36,7 @@ Scenario: Delete position
    Then I click on "ok" as Vusala
    And I validate "toasterValidation" toaster message is displayed
    And I wait for "200" milliseconds
-   And I validate "Showing 0 to 0 of 0 entries (filtered from 202 total entries)" message is displayed
+   And I validate "No matching records found" message is displayed
 
 @Vusala3 @RT-23
 Scenario: Remove filters
@@ -50,3 +48,11 @@ Scenario: Remove filters
   Then I validate "- Select Location -" text is displayed in "location" dropDown list
   Then I validate "- Select Position -" text is displayed in "position" dropDown list
   Then I validate "- Select Status -" text is displayed in "status" dropDown list
+
+@Vusala4 @RT-26
+Scenario:  Buffsci title
+  When I click on "Applicants" as Vusala
+  And I validate that "Applicants" element is visible on the page
+  And I click on "BuffsciTitle" as Vusala
+  And I wait for "900" milliseconds
+  Then I validate that "StaffList" element is visible on the page
