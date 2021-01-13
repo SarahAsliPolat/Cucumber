@@ -23,9 +23,9 @@ Scenario: Delete position
    And I wait for "200" milliseconds
    Then I click on "Title" as Vusala
    Then I enter "AZ_dili" in the "Title" as Vusala
-   Then I select element from "Position Type"
-   Then I select element from "Location"
-   Then I select element from "Reports To"
+   And I select "Custodian" from "PositionType" dropDownList
+   And I select "Elementary" from "Location" dropDownList
+   And I select "Roberts, June (Art)" from "ReportsTo" dropDownList
    And I scroll and click to "Save" as Vusala
    And I wait for "500" milliseconds
    And I validate "toasterValidation" toaster message is displayed
@@ -35,22 +35,23 @@ Scenario: Delete position
    Then I validate "ConfirmToDelete" Pop-Up page displayed
    Then I click on "ok" as Vusala
    And I validate "toasterValidation" toaster message is displayed
-   And I wait for "200" milliseconds
+   And I wait for "1000" milliseconds
    And I validate "No matching records found" message is displayed
+   And I wait for "1000" milliseconds
 
 @Vusala3 @RT-23
 Scenario: Remove filters
   When I click on "Positions" as Vusala
-  Then I select element from "location"
-  Then I select element from "position"
-  Then I select element from "status"
+  And I select "Elementary" from "SelectLocation" dropDownList
+  And I select "College Guidance" from "SelectPosition" dropDownList
+  And I select "Interviewed" from "SelectStatus" dropDownList
   When I click on "ClearFilters" as Vusala
   Then I validate "- Select Location -" text is displayed in "location" dropDown list
   Then I validate "- Select Position -" text is displayed in "position" dropDown list
   Then I validate "- Select Status -" text is displayed in "status" dropDown list
 
 @Vusala4 @RT-26
-Scenario:  Buffsci title
+Scenario:  Buffsci home
   When I click on "Applicants" as Vusala
   And I validate that "Applicants" element is visible on the page
   And I click on "BuffsciTitle" as Vusala
