@@ -48,8 +48,6 @@ public class VusalaStepDefs {
 
     @When("I click on {string} as Vusala")
     public void iClickOnAsVusala(String element) {
-
-
         WebElement ClickElement = (WebElement) WebElementMgr.
                 getWebElement(PageObjectMgr.getCurrentPage(), element);
 
@@ -74,15 +72,12 @@ public class VusalaStepDefs {
         enterText.sendKeys(text);
     }
 
-    @Then("I select element from {string}")
-    public void iSelectElementFrom(String boxName) {
-        // String locator_Vusala2="//label[contains(text(),'" + boxName + "')]/../select";
-
-        String locator_Vusala3 = "//select[contains(@name,'" + boxName + "')]";
-        Select element = new Select(driver.
-                findElement(By.xpath(locator_Vusala3)));
-        element.selectByIndex(3);
-
+    @Then("I select {string} from {string} dropDownList")
+    public void iSelectFromDropDown(String option, String element) {
+        WebElement dropDown = (WebElement) WebElementMgr.
+                getWebElement(PageObjectMgr.getCurrentPage(), element);
+        Select select = new Select(dropDown);
+        select.selectByVisibleText(option);
     }
 
     @And("I scroll and click to {string} as Vusala")
@@ -118,6 +113,15 @@ public class VusalaStepDefs {
         String selectedOption = elm.getText();
         Assert.assertEquals(selectedOption,text);
         System.out.println("Selected element: " + selectedOption+" is visible");
+    }
+
+
+    @Then("I validate that {string} element is visible on the page")
+    public void iValidateThatElementIsVisibleOnThePage(String element) {
+        WebElement validateElement = (WebElement) WebElementMgr.
+                getWebElement(PageObjectMgr.getCurrentPage(), element);
+        Assert.assertTrue(validateElement.isDisplayed());
+        System.out.println("the text is :"+validateElement.getText());
     }
 }
 
