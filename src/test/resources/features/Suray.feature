@@ -11,7 +11,7 @@
       |Details      |
       |Attendance   |
       |Files        |
-
+#RT 19
     @Columns
     Scenario:As a user, I need to see applicants as a table that consists of six columns
       When the user clicks to "applicants"
@@ -23,4 +23,8 @@
         |Internal              |
         |Interview Rates       |
         |Status                |
-
+#RT-22
+@Navigation_bar
+     Scenario:As an admin I should be able to see a navigation bar for view more applicants
+     When the user clicks to "applicants"
+     Then the user validates pages corresponding with the navigation bar
