@@ -57,3 +57,10 @@ Scenario:  Buffsci home
   And I click on "BuffsciTitle" as Vusala
   And I wait for "900" milliseconds
   Then I validate that "StaffList" element is visible on the page
+
+  @Vusala5 @RT-27
+    Scenario:  I should be able to see Termination Date and an input box
+    When I click on "Termination" as Vusala
+    And I wait for "200" milliseconds
+    And I validate that "TerminationDate" element is visible on the page
+    Then I validate that "InputBox" element is visible on the page

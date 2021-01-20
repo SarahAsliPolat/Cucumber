@@ -96,4 +96,15 @@ public class VusalaPage {
     @FindBy(how = How.XPATH, using = "//i[@class='fa fa-users mr-1']//parent::h3")
     public static WebElement StaffList;
 
+
+
+    @FindBy(how = How.XPATH, using = "//button[contains(text(),'Termination')]")
+    public static WebElement Termination;
+
+    @FindBy(how = How.XPATH, using = "//label[contains(text(),'Termination Date:')]")
+    public static WebElement TerminationDate;
+
+    @FindBy(how = How.XPATH, using = "//label[contains(text(),'Termination Date:')]//following::div")
+    public static WebElement InputBox;
+
 }
