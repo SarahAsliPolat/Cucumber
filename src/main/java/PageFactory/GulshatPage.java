@@ -80,7 +80,115 @@ public class GulshatPage {
     @FindBy (css = "a.nav-link[href='#']")
     public  static List<WebElement> staffMembers;
 
-    @FindBy(xpath = "//*[text()='Position:']/../div")//.form-control
+    @FindBy(xpath = "//*[text()='Position:']/../div")
     public  static WebElement position;
+
+
+    //RT-20
+    @FindBy(how = How.XPATH,using ="//p[normalize-space()='Applicants']" )
+    public static  WebElement applicants;
+
+    @FindBy(how = How.XPATH,using = "//div[@class='btn-group']")
+    public static WebElement edit;
+
+    @FindBy(how = How.XPATH,using = "//label[contains(text(),'Applied At:')]")
+    public static WebElement appliedAt;
+
+    @FindBy(how = How.XPATH,using = "//label[contains(text(),'Address:')]")
+    public static WebElement address;
+
+    @FindBy(how = How.XPATH,using = "//label[contains(text(),'Email:')]")
+    public  static WebElement email;
+
+    @FindBy(how=How.XPATH,using = "//label[contains(text(),'Experience:')]")
+    public static WebElement experience;
+
+    @FindBy(how=How.XPATH,using = "//label[contains(text(),'Certifications:')]")
+    public static WebElement certification;
+
+    @FindBy(how=How.XPATH,using = "//label[contains(text(),'Resume / Documents:')]")
+    public  static WebElement resumeDocuments;
+
+    @FindBy(how=How.XPATH,using = "//label[contains(text(),'Recent Updates:')]")
+    public static WebElement recentUpdates;
+
+    @FindBy(how = How.XPATH,using = "//label[contains(text(),'Updated At:')]")
+    public static WebElement updatedAt;
+
+    @FindBy(how = How.XPATH,using = "//label[contains(text(),'Phone Number:')]")
+    public static WebElement phoneNumber;
+
+    @FindBy(how=How.XPATH,using ="//label[contains(text(),'Notes:')]" )
+    public  static WebElement notes;
+
+    //RT-25
+    @FindBy(how = How.XPATH,using = "//p[contains(text(),'Positions')]")
+    public static WebElement positionsPage;
+
+    @FindBy(how = How.XPATH,using = "//a[contains(text(),'Add New')]")
+    public static WebElement addNew;
+
+    @FindBy(how = How.XPATH,using = "//label[contains(text(),'Title')]")
+    public static WebElement titleText;
+
+    @FindBy(how = How.XPATH,using = "//label[contains(text(),'Title')]//following::input")
+    public static WebElement titleBox;
+
+    @FindBy(how = How.XPATH,using = "//textarea[@name='notes']")
+    public static WebElement noteBox;
+
+//latest
+    @FindBy(how = How.XPATH,using = "//select[@name='location_id' and @class='form-control']")
+    public  static WebElement locationDropDown;
+
+    @FindBy(how = How.XPATH,using = "//select[@name='position_type_id' and @class='form-control']")
+    public  static WebElement positionDropDown;
+
+    @FindBy(how = How.XPATH,using = "//select[@class='form-control select2-hidden-accessible']")
+    public  static WebElement assignedStaff;
+
+    @FindBy(how = How.XPATH,using = "//a[normalize-space()='OK']")
+    public static WebElement confirmOk;
+
+    @FindBy(how = How.XPATH,using = "//select[@name='reports_to_id' and @class='form-control']")
+    public  static WebElement reportsToDropDown;
+
+    @FindBy(how = How.XPATH,using = "//label[normalize-space()='Supervisor']//following::input[2]")
+    public static WebElement Supervisor_No;
+
+    @FindBy(how = How.XPATH,using = "//label[normalize-space()='Posted']//following::input[1]")
+    public static WebElement posted_Yes;
+
+    @FindBy(xpath = "//button[text()='Save']")
+    public static WebElement save;
+
+    @FindBy(className = "toast-message")
+    public static WebElement staffPositionSaved;
+
+    @FindBy(how = How.XPATH, using = "//label[contains(text(),'Search')]//following::input")
+    public static WebElement searchBox;
+
+    @FindBy(how = How.XPATH, using = "//form[@id='staff-positions-form']//button[@aria-label='Close']")
+    public static WebElement closeButton;
+
+    @FindBy(how = How.XPATH,using = "//a[@data-target='#modalDelete']")
+    public static WebElement deleteButton;
+
+    @FindBy(xpath = "//button[text()='OK']")
+    public static WebElement ok;
+
+    @FindBy(how = How.XPATH, using = "//h4[contains(text(),'Confirm to Delete')]")
+    public static WebElement ConfirmToDelete;
+
+    //////
+
+
+
+    @FindBy(how = How.XPATH,using = "//h4[normalize-space()='Confirm']")
+    public static WebElement confirm;
+
+
+
+
 
 }

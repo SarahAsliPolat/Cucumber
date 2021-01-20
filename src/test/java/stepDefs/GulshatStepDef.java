@@ -5,6 +5,7 @@ import Utilities.Driver;
 import Utilities.PageObjectMgr;
 import Utilities.ScenarioManager;
 import Utilities.WebElementMgr;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -12,6 +13,7 @@ import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -43,34 +45,23 @@ public class GulshatStepDef {
 
     }
 
-
-    @When("I click on {string} as Gulshat")
-    public void iClickOnAsGulshat(String element) {
-
-        WebElement clickElement = new WebDriverWait(Driver.getDriver(),
-                6).until(ExpectedConditions.visibilityOf(GulshatPage.newHireButton));
-    }
-
-//    @Then("I verify value is as expected")
-//    public void iVerifyValueIsAsExpected() throws Exception {
-//        try {
-//            WebElement person = driver.findElement(By.xpath("//a[contains(text(),'Derek Parsons')]"));
-//            String actual = driver.findElement(By.xpath("//div[contains(text(),'08/15/2017')]")).getText();
-//            String expected = "08/15/2017";
-//            Assert.assertEquals(expected, actual);
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            //throw new Exception("try again");
-//        }
+//
+//    @When("I click on {string} as Gulshat")
+//    public void iClickOnAsGulshat(String element) {
+//
+//        WebElement clickElement = new WebDriverWait(Driver.getDriver(),
+//                6).until(ExpectedConditions.visibilityOf(GulshatPage.newHireButton));
 //    }
 
-    @When("I click on {string} tab as Gulshat")
-    public void iClickOnTabAsGulshat(String elementNm) {
-        WebElement element = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), elementNm);
-        element.click();
+    @When("I click on {string} as Gulshat")
+    public void clickButton(String element) {
+        WebElement clickElement = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), element);
+        WebElement wait = new WebDriverWait(Driver.getDriver(), 3).until(ExpectedConditions.elementToBeClickable(clickElement));
+        wait.click();
 
     }
 
+    //RT-4
     @Then("I verified that {string} element is exist with {string} text")
     public void iVerifiedThatElementIsExistWithText(String elementNm, String expected) throws Exception {
         WebElement fields = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), elementNm);
@@ -83,7 +74,7 @@ public class GulshatStepDef {
 
     }
 
-
+    //RT-13
     @Then("I validate position filter is working")
     public void iValidatePositionFilterIsWorking() throws InterruptedException {
         String expected = "";
@@ -100,13 +91,77 @@ public class GulshatStepDef {
                 Thread.sleep(1000);
                 actual = position.getText();
                 System.out.println(expected + " as expected  " + actual + "   Actual");
-                Assert.assertEquals("position does not match with positions filter",expected,actual);
+                Assert.assertEquals("position does not match with positions filter", expected, actual);
             }
 
         }
 
     }
+
+    //RT-20
+    @Then("I validate the details below are present on the applicant information page")
+    public void iValidateTheDetailsBelowArePresentOnTheApplicantInformationPage(List<String> expectedList) {
+        int i = 0;
+
+        try {
+            for (i = 0; i < expectedList.size(); i++) {
+                WebElement element = driver.findElement(By.xpath("//*[contains(text(),'" + expectedList.get(i) + "')]"));
+                System.out.println(element.getText());
+            }
+
+        } catch (Exception e) {
+            Assert.fail(expectedList.get(i) + " is not present on the applicant information page");
+        }
+
+    }
+
+
+    //RT-25
+    @And("I enter {string} in the {string} as Gulshat")
+    public void iEnterInTheAsGulshat(String text, String textBox) {
+        WebElement enterText = (WebElement) WebElementMgr.
+                getWebElement(PageObjectMgr.getCurrentPage(), textBox);
+        enterText.click();
+        enterText.sendKeys(text);
+    }
+    @When("I select {string} from {string} drop-down")
+    public void iSelectFromDropDown(String option, String element) {
+        WebElement dropDown = (WebElement) WebElementMgr.
+                getWebElement(PageObjectMgr.getCurrentPage(), element);
+        Select select = new Select(dropDown);
+        select.selectByVisibleText(option);
+    }
+
+    @And("I scroll down and click to {string} button as Gulshat")
+    public void iScrollDownAndClickToButtonAsGulshat(String element) {
+        WebElement scrollElement = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), element);
+        Actions built = new Actions(driver);
+        built.moveToElement(scrollElement).click().build().perform();
+
+    }
+    @And("I enter {string} in the {string}")
+    public void iEnterInThe(String sendText, String  element) {
+        WebElement enterName= (WebElement) WebElementMgr.
+                getWebElement(PageObjectMgr.getCurrentPage(), element);
+        enterName.sendKeys(sendText);
+    }
+
+    @Then("I validate the details below are present on the new position  page")
+    public void iValidateTheDetailsBelowArePresentOnTheNewPositionPage(List<String> expectedList) {
+        int i = 0;
+
+        try {
+            for (i = 0; i < expectedList.size(); i++) {
+                WebElement element = driver.findElement(By.xpath("//*[contains(text(),'" + expectedList.get(i) + "')]"));
+                System.out.println(element.getText());
+            }
+        } catch (Exception e) {
+            Assert.fail(expectedList.get(i) + " is not present on the new position page");
+        }
+    }
 }
+
+
 
 
 

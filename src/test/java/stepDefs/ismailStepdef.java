@@ -128,24 +128,20 @@ public class ismailStepdef {
         List<WebElement>positionList = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), "p1");
         List<WebElement> identicalValue = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), "p2");
 
-
-
         String pos=null;
         String ido=null;
-        Thread.sleep(4000);
+        Thread.sleep(400);
         for (int i = 1; i <positionList.size() ; i++) {
-
 
         positionList.get(i).click();
             pos=positionList.get(i).getText();
-            Thread.sleep(4000);
-
+            Thread.sleep(400);
+            System.out.println(pos);
             for (int j = 0; j <identicalValue.size() ; j++) {
 
-
-                Thread.sleep(4000);
+                Thread.sleep(400);
            ido=identicalValue.get(j).getText();
-
+                System.out.println(ido);
            if (!ido.equals(null)){
                if (!ido.equals(pos)) {
                    throw new Exception(" Fail; \n Expected: " + pos + " \n Found : " + ido);
@@ -162,6 +158,37 @@ public class ismailStepdef {
        }
 
    }
+
+    }
+
+
+
+    @Then("i validate all the text on the position page")
+    public void iValidateAllTheTextOnThePositionPage(List<String >ExpectedList) throws Exception{
+       List< WebElement> actualElement = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), "ptextPositions");
+       String Exp;
+       String Actu;
+
+        for (int i = 0; i <ExpectedList.size() ; i++) {
+           Exp= ExpectedList.get(i);
+           Actu=actualElement.get(i).getText();
+            System.out.println(("  Expected :"+Exp+" \n Found : "+Actu));
+           if (!Exp.equalsIgnoreCase(Actu)){
+               throw new Exception("Fail; \n Expected :"+Exp+" \n Found : "+Actu);
+           }
+
+
+        }
+
+    }
+
+    @Then("i validate the {string} page pups up")
+    public void iValidateThePagePupsUp(String expected)throws Exception {
+        WebElement actualElement = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), "newPostionpage");
+        if (!actualElement.getText().equalsIgnoreCase(expected)){
+            throw new Exception("Fail; \n Expected :"+expected+" \n Found : "+actualElement.getText());
+        }
+
 
     }
 }

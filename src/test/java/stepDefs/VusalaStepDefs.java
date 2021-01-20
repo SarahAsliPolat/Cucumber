@@ -1,6 +1,5 @@
 package stepDefs;
 
-import PageFactory.VusalaPage;
 import Utilities.Driver;
 import Utilities.PageObjectMgr;
 import Utilities.ScenarioManager;
@@ -17,6 +16,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.asserts.Assertion;
 
 public class VusalaStepDefs {
     WebDriver driver = Driver.getDriver();
@@ -48,8 +48,6 @@ public class VusalaStepDefs {
 
     @When("I click on {string} as Vusala")
     public void iClickOnAsVusala(String element) {
-
-
         WebElement ClickElement = (WebElement) WebElementMgr.
                 getWebElement(PageObjectMgr.getCurrentPage(), element);
 
@@ -74,12 +72,12 @@ public class VusalaStepDefs {
         enterText.sendKeys(text);
     }
 
-    @Then("I select element from {string}")
-    public void iSelectElementFrom(String boxName) {
-        Select element = new Select(driver.
-                findElement(By.xpath("//label[contains(text(),'" + boxName + "')]/../select")));
-        element.selectByIndex(2);
-
+    @Then("I select {string} from {string} dropDownList")
+    public void iSelectFromDropDown(String option, String element) {
+        WebElement dropDown = (WebElement) WebElementMgr.
+                getWebElement(PageObjectMgr.getCurrentPage(), element);
+        Select select = new Select(dropDown);
+        select.selectByVisibleText(option);
     }
 
     @And("I scroll and click to {string} as Vusala")
@@ -108,5 +106,22 @@ public class VusalaStepDefs {
     }
 
 
+    @Then("I validate {string} text is displayed in {string} dropDown list")
+    public void iValidateTextIsDisplayedInDropDownList(String text, String boxName) {
+        Select select = new Select(driver.findElement(By.xpath(" //select[contains(@name,'" + boxName + "')]")));
+        WebElement elm= select.getFirstSelectedOption();
+        String selectedOption = elm.getText();
+        Assert.assertEquals(selectedOption,text);
+        System.out.println("Selected element: " + selectedOption+" is visible");
+    }
+
+
+    @Then("I validate that {string} element is visible on the page")
+    public void iValidateThatElementIsVisibleOnThePage(String element) {
+        WebElement validateElement = (WebElement) WebElementMgr.
+                getWebElement(PageObjectMgr.getCurrentPage(), element);
+        Assert.assertTrue(validateElement.isDisplayed());
+        System.out.println("the text is :"+validateElement.getText());
+    }
 }
 
