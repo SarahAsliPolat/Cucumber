@@ -1,9 +1,13 @@
 package stepDefs;
 
+import Utilities.CacheStorage;
 import Utilities.ConfigFileReader;
+import Utilities.ScenarioManager;
 import io.cucumber.java.en.Then;
+import static io.restassured.RestAssured.given;
+import io.restassured.response.Response;
 import org.json.simple.JSONObject;
-
+import io.restassured.specification.RequestSpecification;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,17 +16,17 @@ public class RestAPIStepdef {
 
     @Then("^I verify (get|post|put|delete)Service for \"(.*)\" has status (\\d+) on \"(.*)\" with header params \"(.*)\", path params \"(.*)\", query params \"(.*)\", form params \"(.*)\", auth \"(.*)\", body \"(.*)\"$")
     public void i_validate_rest_service(String method, String storingkey, int statusCode, String URL, String headerkey, String pathkey, String querykey, String formkey, String auth, String body) throws Exception {
-        ConfigFileReader c = new ConfigFileReader("sdma");
-        String url = c.getPropertyValue(URL);
+
+        String url = ConfigFileReader.getPropertyValue(URL);
         RequestSpecification request = given();
         Response response = null;
 
-        if (!pathkey.equals("")) request = request.pathParams(context.getCacheParamMap(pathkey));
-        if (!auth.equals("")) request = request.auth().basic(context.getCacheParamMap(auth).get("username"), context.getCacheParamMap(auth).get("password"));
-        if (!headerkey.equals("")) request = request.headers(context.getCacheParamMap(headerkey));
-        if (!querykey.equals("")) request = request.queryParams(context.getCacheParamMap(querykey));
-        if (!formkey.equals("")) request = request.formParams(context.getCacheParamMap(formkey));
-        if (!body.equals("")) request = request.body(new JSONObject(context.getCacheParamMap(body)));
+        if (!pathkey.equals("")) request = request.pathParams(CacheStorage.getCacheParam(pathkey));
+        if (!auth.equals("")) request = request.auth().basic(CacheStorage.getCacheParam(auth).get("username"), CacheStorage.getCacheParam(auth).get("password"));
+        if (!headerkey.equals("")) request = request.headers(CacheStorage.getCacheParam(headerkey));
+        if (!querykey.equals("")) request = request.queryParams(CacheStorage.getCacheParam(querykey));
+        if (!formkey.equals("")) request = request.formParams(CacheStorage.getCacheParam(formkey));
+        if (!body.equals("")) request = request.body(new JSONObject(CacheStorage.getCacheParam(body)));
 
         switch (method) {
             case "get":
@@ -42,8 +46,8 @@ public class RestAPIStepdef {
         }
 
         response.then().assertThat().statusCode(statusCode);
-        context.setResponseHashMap(storingkey, response);
-        context.getScenarioManager().getScenario().write("Rest service call completed with status code " + statusCode + ". Response json:\r\n" + context.getResponseHashMap(storingkey).asString());
+        CacheStorage.setResponse(storingkey, response);
+        ScenarioManager.getScenario().write("Rest service call completed with status code " + statusCode + ". Response json:\r\n" + CacheStorage.getResponse(storingkey).asString());
     }
 
     @Then("^I store parameters in (\\w+) map$")
@@ -52,13 +56,13 @@ public class RestAPIStepdef {
         for (Map.Entry<String, String> param : params.entrySet()) {
             paramsMap.put(param.getKey(), param.getValue());
         }
-        context.setCacheParamMap(key, paramsMap);
+        CacheStorage.setCacheParam(key, paramsMap);
     }
 
     @Then("^I verify rest response data for (\\w+)$")
     public void i_verify_rest_response(String retrievingkey, Map<String, String> expectedmap) throws Exception {
         boolean pass = true;
-        Response response = context.getResponseHashMap(retrievingkey);
+        Response response = CacheStorage.getResponse(retrievingkey);
 
         for (Map.Entry<String, String> param : expectedmap.entrySet()) {
             String paramKey;
@@ -98,10 +102,10 @@ public class RestAPIStepdef {
 
             }
             if (respValue.equals(paramValue)) {
-                context.getScenarioManager().getScenario().write("Pass; Found " + paramKey + " : " + respValue);
+                ScenarioManager.getScenario().write("Pass; Found " + paramKey + " : " + respValue);
             } else {
                 pass = false;
-                context.getScenarioManager().getScenario().write("Fail; Expected " + paramValue + "; Found " + paramKey + " : " + respValue);
+                ScenarioManager.getScenario().write("Fail; Expected " + paramValue + "; Found " + paramKey + " : " + respValue);
             }
 
         }
@@ -112,17 +116,17 @@ public class RestAPIStepdef {
     @Then("I verify rest response data contains for {string}")
     public void iVerifyRestResponseDataContainsFor(String retrievingkey, List<String> expectedvalues) throws Exception {
         boolean fail = false;
-        String rsp = context.getResponseHashMap(retrievingkey).asString();
+        String rsp = CacheStorage.getResponse(retrievingkey).asString();
         String expectedValue = "";
 
         for (int i = 0; i < expectedvalues.size(); i++) {
             expectedValue = expectedvalues.get(i);
 
             if (!rsp.contains(expectedValue)) {
-                context.getScenarioManager().getScenario().write(" Fail; Could not find " + expectedValue + " in response");
+                ScenarioManager.getScenario().write(" Fail; Could not find " + expectedValue + " in response");
                 fail = true;
             } else {
-                context.getScenarioManager().getScenario().write(" Pass; " + expectedValue + " is present in response");
+                ScenarioManager.getScenario().write(" Pass; " + expectedValue + " is present in response");
             }
 
         }
@@ -135,10 +139,9 @@ public class RestAPIStepdef {
     public void iVerifyPostMethodCreatedDataWith(String id, String bodyKey) throws Exception {
         boolean pass = true;
 
-        String ID = context.getResponseHashMap(id).asString();
-        Map<String, String> rsBody = context.getCacheParamMap(bodyKey);
-        ConfigFileReader c = new ConfigFileReader("sdma");
-        String url = c.getPropertyValue("getStaffInfo");
+        String ID = CacheStorage.getResponse(id).asString();
+        Map<String, String> rsBody = CacheStorage.getCacheParam(bodyKey);
+        String url = ConfigFileReader.getPropertyValue("getStaffInfo");
         RequestSpecification request = given();
         Response response = null;
         request = request.pathParam("staff_id", ID);
@@ -182,10 +185,10 @@ public class RestAPIStepdef {
             }
 
             if (respValue.equals(paramValue)) {
-                context.getScenarioManager().getScenario().write("Pass; Found " + paramKey + " : " + respValue);
+                ScenarioManager.getScenario().write("Pass; Found " + paramKey + " : " + respValue);
             } else {
                 pass = false;
-                context.getScenarioManager().getScenario().write("Fail; Expected " + paramValue + "; Found " + paramKey + " : " + respValue);
+                ScenarioManager.getScenario().write("Fail; Expected " + paramValue + "; Found " + paramKey + " : " + respValue);
             }
 
         }
@@ -194,10 +197,8 @@ public class RestAPIStepdef {
 
     @Then("I delete {string} staff")
     public void iDeleteStaff(String id) {
-        String ID = context.getResponseHashMap(id).asString();
-
-        ConfigFileReader c = new ConfigFileReader("sdma");
-        String url = c.getPropertyValue("postExit");
+        String ID = CacheStorage.getResponse(id).asString();
+        String url = ConfigFileReader.getPropertyValue("postExit");
         RequestSpecification request = given();
         Response response = null;
 
@@ -210,7 +211,7 @@ public class RestAPIStepdef {
 
         response.then().assertThat().statusCode(200);
 
-        context.getScenarioManager().getScenario().write("Rest service call completed with status code 200 and Staff "+ ID+" deleted ");
+        ScenarioManager.getScenario().write("Rest service call completed with status code 200 and Staff "+ ID+" deleted ");
 
     }
 
