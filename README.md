@@ -17,7 +17,7 @@ Mac OS: file->Project Structure->Project->select 11 Project SDK and select 11 Pr
 Note: After completing your settings do not forget re start your IntelliJ.
 
 ### Use this command to run the tests:
-mvn clean test verify -Dcucumber.options="--tags @Login" -Dbrowser=chrome 
+mvn clean test verify -Dcucumber.options="--tags @Login" -Dbrowser=chrome -DtestType=UI 
 
 ### Finally, If you run from runners class, use this command to generate advance cucumber report:
 mvn verify

@@ -1,6 +1,6 @@
 Feature: Rest API
 
-  @Rest
+  @Rest @1
   Scenario: get staff info by staff ID
 
     Given I store parameters in userId map
@@ -14,7 +14,7 @@ Feature: Rest API
       | location   | High School   |
       | job        | Teacher - ENL |
 
-   @Rest
+   @Rest @2
   Scenario: get self info
 
     Given I verify getService for "SDMA" has status 200 on "getSelfInfo" with header params "", path params "", query params "", form params "", auth "", body ""
@@ -24,7 +24,7 @@ Feature: Rest API
       | location   | District Office    |
       | job        | Executive Director |
 
-   @Rest
+   @Rest @3
   Scenario: get staff list 1
 
     Given I verify getService for "SDMA" has status 200 on "getStaffList" with header params "", path params "", query params "", form params "", auth "", body ""
@@ -35,7 +35,7 @@ Feature: Rest API
       | staff_list.location[0]   | High School  |
       | staff_list.job[0]        | Teacher - ENL|
 
-   @Rest
+   @Rest @4
   Scenario: get staff list 2
 
     Given I verify getService for "SDMA" has status 200 on "getStaffList" with header params "", path params "", query params "", form params "", auth "", body ""
@@ -45,7 +45,7 @@ Feature: Rest API
       |{"id":78213,"full_name":"Amanda Daly","location":"High School","job":"Teacher - ELA - (9-12)"} |
 
 
-   @Rest
+   @Rest @5
   Scenario: Post new Staff
 
     Given I store parameters in postBody map
