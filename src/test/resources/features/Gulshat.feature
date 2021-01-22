@@ -6,7 +6,7 @@ Feature: As an admin, when I click on Details tab,
 
   #RT-4
   Scenario: Gulshat test
-    When I click on "details" tab as Gulshat
+    When I click on "details" as Gulshat
     And I wait for "500" milliseconds
     Then I verified that "originalHireDate" element is exist with "Original Hire Date:" text
     Then I verified that "contractWorkDays" element is exist with "Contract Work Days:" text
@@ -46,7 +46,6 @@ Feature: As an admin, when I click on Details tab,
       | Notes:              |
 
   #RT-25
-  @Gulshat
   Scenario: Save as a new position
     When I click on "positionsPage" as Gulshat
     Then I click on "addNew" as Gulshat
@@ -86,6 +85,18 @@ Feature: As an admin, when I click on Details tab,
     And I click on "deleteButton" as Gulshat
     And I wait for "200" milliseconds
     And I click on "ok" as Gulshat
+
+  @Gulshat
+#RT-28
+  Scenario: Reason and a dropdown list should appear
+    When I click on "termination" as Gulshat
+    And I wait for "300" milliseconds
+    And I click on "ReasonDropDown" as Gulshat
+    Then I validate that the list below is present on the "ReasonDropDownList"
+      | Resignation                     |
+      | Retirement                      |
+      | Performance related termination |
+      | Other                           |
 
 
 
