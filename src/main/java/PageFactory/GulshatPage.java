@@ -137,7 +137,6 @@ public class GulshatPage {
     @FindBy(how = How.XPATH, using = "//textarea[@name='notes']")
     public static WebElement noteBox;
 
-    //latest
     @FindBy(how = How.XPATH, using = "//select[@name='location_id' and @class='form-control']")
     public static WebElement locationDropDown;
 

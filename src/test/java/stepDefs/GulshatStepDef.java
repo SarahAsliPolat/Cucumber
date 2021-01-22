@@ -138,7 +138,6 @@ public class GulshatStepDef {
         WebElement scrollElement = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), element);
         Actions built = new Actions(driver);
         built.moveToElement(scrollElement).click().build().perform();
-
     }
 
     @And("I enter {string} in the {string}")
@@ -147,7 +146,6 @@ public class GulshatStepDef {
                 getWebElement(PageObjectMgr.getCurrentPage(), element);
         enterName.sendKeys(sendText);
     }
-
     @Then("I validate the details below are present on the new position  page")
     public void iValidateTheDetailsBelowArePresentOnTheNewPositionPage(List<String> expectedList) {
         int i = 0;

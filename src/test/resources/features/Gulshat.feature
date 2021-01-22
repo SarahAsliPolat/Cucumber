@@ -85,7 +85,7 @@ Feature: As an admin, when I click on Details tab,
     And I click on "deleteButton" as Gulshat
     And I wait for "200" milliseconds
     And I click on "ok" as Gulshat
-
+    
   @Gulshat
 #RT-28
   Scenario: Reason and a dropdown list should appear
