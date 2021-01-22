@@ -47,7 +47,7 @@ public class RestAPIStepdef {
 
         response.then().assertThat().statusCode(statusCode);
         CacheStorage.setResponse(storingkey, response);
-        ScenarioManager.getScenario().write("Rest service call completed with status code " + statusCode + ". Response json:\r\n" + CacheStorage.getResponse(storingkey).asString());
+        ScenarioManager.getScenario().write("Rest service call completed with status code " + statusCode + ". Response json:\r\n" + response.asString());
     }
 
     @Then("^I store parameters in (\\w+) map$")
