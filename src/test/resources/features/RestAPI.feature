@@ -1,30 +1,31 @@
 Feature: Rest API
 
-  @Rest @1
+  @API @1
   Scenario: get staff info by staff ID
 
-    Given I store parameters in userId map
+    Given I store parameters in user map
       | staff_id| 67986|
 
-    Given I verify getService for "SDMA" has status 200 on "getStaffInfo" with header params "", path params "userId", query params "", form params "", auth "", body ""
+    Given I verify getService for "SDMA" has status 200 on "getStaffInfo" with header params "", path params "user", query params "", form params "", auth "", body ""
 
     Then I verify rest response data for SDMA
-      | room       | 744           |
-      | full_name  | Douglas Fox   |
+      | room       | 786           |
+      | full_name  | User 4. Test  |
       | location   | High School   |
       | job        | Teacher - ENL |
+      | salutation | Miss          |
 
-   @Rest @2
+  @API @2
   Scenario: get self info
 
     Given I verify getService for "SDMA" has status 200 on "getSelfInfo" with header params "", path params "", query params "", form params "", auth "", body ""
     Then I verify rest response data for SDMA
-      | room       |300                 |
-      | full_name  |Betty C. Jackson    |
-      | location   | District Office    |
-      | job        | Executive Director |
+      | room          |0                            |
+      | full_name     |John M. Doe                |
+      | email         | admin@staging-buffsci.org   |
+      | gender        | Male                       |
 
-   @Rest @3
+  @API @3
   Scenario: get staff list 1
 
     Given I verify getService for "SDMA" has status 200 on "getStaffList" with header params "", path params "", query params "", form params "", auth "", body ""
@@ -35,7 +36,7 @@ Feature: Rest API
       | staff_list.location[0]   | High School  |
       | staff_list.job[0]        | Teacher - ENL|
 
-   @Rest @4
+  @API @4
   Scenario: get staff list 2
 
     Given I verify getService for "SDMA" has status 200 on "getStaffList" with header params "", path params "", query params "", form params "", auth "", body ""
@@ -45,7 +46,7 @@ Feature: Rest API
       |{"id":78213,"full_name":"Amanda Daly","location":"High School","job":"Teacher - ELA - (9-12)"} |
 
 
-   @Rest @5
+  @API @5
   Scenario: Post new Staff
 
     Given I store parameters in postBody map
