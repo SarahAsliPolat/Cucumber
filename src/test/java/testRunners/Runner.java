@@ -8,7 +8,7 @@ import io.cucumber.testng.CucumberOptions;
         plugin = {"pretty", "json:target/cucumber.json",
                 "html:target/cucumber-html-reports"}
 
-        ,tags = {"@Gulshat"}
+        ,tags = {"@SDMA1"}
 
 
 )
