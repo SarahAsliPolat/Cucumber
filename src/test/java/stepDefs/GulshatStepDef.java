@@ -1,6 +1,6 @@
 package stepDefs;
 
-import PageFactory.GulshatPage;
+
 import Utilities.Driver;
 import Utilities.PageObjectMgr;
 import Utilities.ScenarioManager;
@@ -124,6 +124,7 @@ public class GulshatStepDef {
         enterText.click();
         enterText.sendKeys(text);
     }
+
     @When("I select {string} from {string} drop-down")
     public void iSelectFromDropDown(String option, String element) {
         WebElement dropDown = (WebElement) WebElementMgr.
@@ -137,15 +138,14 @@ public class GulshatStepDef {
         WebElement scrollElement = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), element);
         Actions built = new Actions(driver);
         built.moveToElement(scrollElement).click().build().perform();
-
     }
+
     @And("I enter {string} in the {string}")
-    public void iEnterInThe(String sendText, String  element) {
-        WebElement enterName= (WebElement) WebElementMgr.
+    public void iEnterInThe(String sendText, String element) {
+        WebElement enterName = (WebElement) WebElementMgr.
                 getWebElement(PageObjectMgr.getCurrentPage(), element);
         enterName.sendKeys(sendText);
     }
-
     @Then("I validate the details below are present on the new position  page")
     public void iValidateTheDetailsBelowArePresentOnTheNewPositionPage(List<String> expectedList) {
         int i = 0;
@@ -158,6 +158,18 @@ public class GulshatStepDef {
         } catch (Exception e) {
             Assert.fail(expectedList.get(i) + " is not present on the new position page");
         }
+    }
+    //RT-28
+    @Then("I validate that the list below is present on the {string}")
+    public void iValidateThatTheBelowIsPresentOnTheDropdown(String dropDown, List<String> expectedList) throws Exception {
+        List<WebElement> dropDownList = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), dropDown);
+        for (int i=0; i<expectedList.size();i++){
+            dropDownList.get(i).getText().equals(expectedList.get(i));
+            if(!dropDownList.get(i).getText().equals(expectedList.get(i))){
+                throw new Exception(" Fail; \n Expected: " + expectedList.get(i) + " \n Found : " + dropDownList.get(i).getText());
+            }
+        }
+
     }
 }
 
