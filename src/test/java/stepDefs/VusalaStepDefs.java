@@ -1,13 +1,15 @@
 package stepDefs;
 
-import Utilities.Driver;
-import Utilities.PageObjectMgr;
-import Utilities.ScenarioManager;
-import Utilities.WebElementMgr;
+import Utilities.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.config.SSLConfig;
+import io.restassured.http.Method;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+import org.json.simple.JSONObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +19,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.Assertion;
+
+import static io.restassured.RestAssured.given;
 
 public class VusalaStepDefs {
     WebDriver driver = Driver.getDriver();
@@ -122,6 +126,95 @@ public class VusalaStepDefs {
                 getWebElement(PageObjectMgr.getCurrentPage(), element);
         Assert.assertTrue(validateElement.isDisplayed());
         System.out.println("the text is :"+validateElement.getText());
+    }
+
+    @When("I print staff info with staff ID")
+    public void iPrintStaffInfoWithStaffID() {
+        String url = ConfigFileReader.getPropertyValue("getStaffInfo");
+        Response response = null;
+        RequestSpecification request = given();
+
+        request=request.pathParams( "staff_id",67986);
+        response = request.get(url);
+        response.then().assertThat().statusCode(200);
+        System.out.println(response.asString());
+
+        String expected_staffId="6535992";
+        String expected_location="High School";
+        String expected_room="786";
+        String actual_staffId=response.jsonPath().get("staff_id").toString();
+        String actual_location=response.jsonPath().get("location").toString();
+        String actual_room=response.jsonPath().get("room").toString();
+        Assert.assertEquals(actual_staffId,expected_staffId,"staff id doesn't match");
+        Assert.assertEquals(actual_location,expected_location,"location doesn't match");
+        Assert.assertEquals(actual_room,expected_room,"room doesn't match");
+
+    }
+
+    @When("I create a new user")
+    public void iCreateANewUser() {
+        String url = "https://reqres.in/api/users";
+        RequestSpecification request = given();
+        Response response = null;
+        JSONObject body123 = new JSONObject();
+        body123.put("name", "ali");
+        body123.put("job", "isci");
+        request.header("Content-Type","application/json");
+        request.body(body123.toJSONString());
+        response = request.request(Method.POST,url);
+        response.prettyPrint();
+        response.getBody().asString();
+        //status code validation
+        int statusCode =response.getStatusCode();
+        response.then().assertThat().statusCode(201);
+        System.out.println("Status Code "+statusCode);
+        String actualName=response.jsonPath().get("name").toString();
+        String expectedName=body123.get("name").toString();
+        Assert.assertEquals(actualName,expectedName);
+        String actualJob=response.jsonPath().get("job").toString();
+        String expectedJob=body123.get("job").toString();
+        Assert.assertEquals(actualJob,expectedJob," expected job is not correct " );
+        System.out.println("actualJob = "+actualJob + "\nactualName= "+actualName);
+        System.out.println("expectedJob = "+expectedJob + "\nexpectedName= "+expectedName);
+    }
+
+    @When("I put new information")
+    public void iPutNewInformation() {
+        String url = "https://reqres.in/api/users/2";
+        Response response = null;
+        RequestSpecification request = given();
+        JSONObject body123 = new JSONObject();
+        body123.put("name", "John");
+        body123.put("job", "Tester");
+        request.header("Content-Type","application/json");
+        request.body(body123.toJSONString());
+        response = request.request(Method.PUT,url);
+        response.prettyPrint();
+        response.getBody().asString();
+        //status code validation
+        int statusCode =response.getStatusCode();
+        response.then().assertThat().statusCode(200);
+        System.out.println("Status Code "+statusCode);
+        String actualName=response.jsonPath().get("name").toString();
+        String expectedName=body123.get("name").toString();
+        Assert.assertEquals(actualName,expectedName);
+        String actualJob=response.jsonPath().get("job").toString();
+        String expectedJob=body123.get("job").toString();
+        Assert.assertEquals(actualJob,expectedJob," expected job is not correct " );
+        System.out.println("actualJob = "+actualJob + "\nactualName= "+actualName);
+        System.out.println("expectedJob = "+expectedJob + "\nexpectedName= "+expectedName);
+
+    }
+
+    @When("Delete the user")
+    public void deleteTheUser() {
+        String url = "https://reqres.in/api/users/2";
+        Response response = null;
+        RequestSpecification request = given();
+        response = request.request(Method.DELETE,url);
+        System.out.println(response);
+        response.then().assertThat().statusCode(204);
+
     }
 }
 
