@@ -1,8 +1,8 @@
 Feature: As an admin, when I click on Details tab,
   I should be able to see the data of selected staff.
 
-  Background: User is logged in
-    Given I logged in Gulshat
+#  Background: User is logged in
+#    Given I logged in Gulshat
 
   #RT-4
   Scenario: Gulshat test
@@ -99,6 +99,12 @@ Feature: As an admin, when I click on Details tab,
       | Other                           |
 
 
+  @API @5
+  Scenario: Post Create
+    When I create a user in post api
+
+    Scenario: Delete user
+      When I delete a user
 
 
 
