@@ -9,6 +9,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.http.Method;
+import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
+import org.json.simple.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -19,6 +23,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
+
+import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.requestSpecification;
 
 
 public class GulshatStepDef {
@@ -146,6 +153,7 @@ public class GulshatStepDef {
                 getWebElement(PageObjectMgr.getCurrentPage(), element);
         enterName.sendKeys(sendText);
     }
+
     @Then("I validate the details below are present on the new position  page")
     public void iValidateTheDetailsBelowArePresentOnTheNewPositionPage(List<String> expectedList) {
         int i = 0;
@@ -159,19 +167,64 @@ public class GulshatStepDef {
             Assert.fail(expectedList.get(i) + " is not present on the new position page");
         }
     }
+
     //RT-28
     @Then("I validate that the list below is present on the {string}")
     public void iValidateThatTheBelowIsPresentOnTheDropdown(String dropDown, List<String> expectedList) throws Exception {
         List<WebElement> dropDownList = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), dropDown);
-        for (int i=0; i<expectedList.size();i++){
+        for (int i = 0; i < expectedList.size(); i++) {
             dropDownList.get(i).getText().equals(expectedList.get(i));
-            if(!dropDownList.get(i).getText().equals(expectedList.get(i))){
+            if (!dropDownList.get(i).getText().equals(expectedList.get(i))) {
                 throw new Exception(" Fail; \n Expected: " + expectedList.get(i) + " \n Found : " + dropDownList.get(i).getText());
             }
         }
 
     }
+
+    // API
+
+    @When("I create a user in post api")
+    public void iCreateAUserInPostApi() {
+        String url = "https://reqres.in/api/users";
+        Response response = null;
+        RequestSpecification request = given();
+        JSONObject body123 = new JSONObject();
+        body123.put("name", "ali");
+        body123.put("job", "isci");
+        request.header("Content-Type", "application/json");
+        request.body(body123.toJSONString());
+        response = request.request(Method.POST, url);
+        response.prettyPrint();
+        response.getBody().asString();
+
+        //status code validation
+        int statusCode = response.getStatusCode();
+        response.then().assertThat().statusCode(201);
+        System.out.println("Status Code " + statusCode);
+
+        String actualName = response.jsonPath().get("name").toString();
+        String expectedName = body123.get("name").toString();
+        Assert.assertEquals("expected name is not correct ", expectedName, actualName);
+
+        String actualJob = response.jsonPath().get("job").toString();
+        String expectedJob = body123.get("job").toString();
+        Assert.assertEquals("expected job is not correct ", expectedJob, actualJob);
+
+        System.out.println("actualJob = " + actualJob + "\nactualName= " + actualName);
+        System.out.println("expectedJob = " + expectedJob + "\nexpectedName= " + expectedName);
+    }
+
+    @When("I delete a user")
+    public void iDeleteAUser() {
+        String url = "https://reqres.in/api/users/2";
+        Response response = null;
+        RequestSpecification request = given();
+        response = request.request(Method.DELETE, url);
+        response.prettyPrint();
+        response.then().assertThat().statusCode(204);
+    }
 }
+
 
 
 
