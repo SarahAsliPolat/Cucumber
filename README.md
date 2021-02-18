@@ -22,3 +22,10 @@ mvn clean test verify -Dcucumber.options="--tags @Login" -Dbrowser=chrome -Dtest
 ### Finally, If you run from runners class, use this command to generate advance cucumber report:
 mvn verify
 
+### Hooks with the tags
+ @Before(‘@Web’)
+ @Before(@dev,@wip) 
+ @Before(@dev,~@wip)
+ @After(‘@Web’)
+ @After(@dev,@wip) 
+ @After(@dev,~@wip)

@@ -1,4 +1,4 @@
-package stepDefs;
+package stepDefs.Hooks;
 
 import Utilities.Constants;
 import Utilities.Driver;
