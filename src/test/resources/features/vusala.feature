@@ -1,7 +1,7 @@
 Feature: Vusala tests
 
-  Background: user is logged in
-    Given I logged in Vusala
+#  Background: user is logged in
+#    Given I logged in Vusala
 
 
   @Vusala1 @RT-6
@@ -64,3 +64,20 @@ Scenario:  Buffsci home
     And I wait for "200" milliseconds
     And I validate that "TerminationDate" element is visible on the page
     Then I validate that "InputBox" element is visible on the page
+
+  @Vusala6 @API1
+      Scenario: get staff info staff ID
+      When I print staff info with staff ID
+
+  @Vusala7 @API2
+    Scenario: Create Post
+    When I create a new user
+
+  @Vusala8 @API3
+    Scenario: Put Update
+    When I put new information
+
+
+  @Vusala9 @API4
+    Scenario: Delete the user
+  When  Delete the user
