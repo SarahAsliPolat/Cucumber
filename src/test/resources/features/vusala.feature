@@ -1,7 +1,7 @@
 Feature: Vusala tests
 
-#  Background: user is logged in
-#    Given I logged in Vusala
+  Background: user is logged in
+    Given I logged in Vusala
 
 
   @Vusala1 @RT-6
@@ -81,3 +81,12 @@ Scenario:  Buffsci home
   @Vusala9 @API4
     Scenario: Delete the user
   When  Delete the user
+
+    @Vusala10 @RT-44
+    Scenario: Choose element from Select Location drop-down list
+      When I click on "Positions" as Vusala
+       And I select "District Office" from "SelectLocation" dropDownList
+       And I wait for "200" milliseconds
+      Then I Validate only "District Office" Positions are displayed from "PositionsOfDistrictOffice"
+
+
