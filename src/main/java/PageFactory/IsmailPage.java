@@ -10,72 +10,28 @@ import org.openqa.selenium.support.How;
 import java.util.List;
 
 public class IsmailPage {
-    @FindBy(how = How.XPATH, using = "//div[@class='links']/a")
-    public static WebElement loadLogin;
 
-    @FindBy(how=How.ID, using="email")
-    public static WebElement emailSection;
 
-    @FindBy(how=How.ID, using="password")
-    public static WebElement passwordSection;
+    @FindBy(how = How.XPATH, using = "//i[@class='nav-icon material-icons']//parent::a")
+    public static WebElement StaffButton;
 
-    @FindBy(how=How.CSS, using="button[type='submit']")
-    public static WebElement loginButton;
+    @FindBy(how = How.XPATH, using = "//h3[contains(text(),'Staff List')]")
+    public static WebElement StaffButmenu;
 
-    @FindBy(how = How.XPATH, using = "//button[text()='New Hire']")
-    public static WebElement newHireButton;
+
+    @FindBy(how = How.XPATH, using = "//li[@class='nav-item']")
+    public static WebElement the4Buttons;
 
 
 
-
-
-    @FindBy( xpath = "//*[@id='newHireForm']/div/div/label")
-    public static List<WebElement> Texts;
-
-
-    @FindBy( xpath = "//select[1]")
-    public static WebElement jobTap;
-
-
-    @FindBy( xpath = "//select[1]/option")
-    public static List<WebElement> jobDropDownText;
-
-
-    @FindBy( xpath = "//i[contains(text(),'record_voice_over')]")
-    public static WebElement applicationsTap;
-
-    @FindBy( xpath = "//h5")
-    public static WebElement applicationsText;
-
-    //new task
-    @FindBy( xpath = "//*[@id='root']/section/div/div/div/form/div/select[2]")
-    public static WebElement selectPositionFiled;
-
-    @FindBy( xpath = "//select[@class=\"filter ml-4\"][2]/option")
-    public static List<WebElement> p1;
-
-    @FindBy( xpath = "//tbody/tr/td[2]")
-    public static List<WebElement> p2;
-
-
-
-// user story N=RT_24
-
-    @FindBy( xpath = "//p[contains(text(),'Positions')]")
-    public static WebElement position;
-
-
-    @FindBy( xpath = "//a[contains(text(),'Add New')]")
-    public static WebElement addNewButton;
-
-
-    @FindBy( xpath = "//h4[contains(text(),'New Position')]")
-    public static WebElement newPostionpage;
-
-
-
-    @FindBy( xpath = "//div[@class=\"col-sm-6 mb-3\"]/label")
-    public static List<WebElement> ptextPositions;
+    @FindBy(how = How.XPATH, using = "//a[text()='Basic']")
+    public static WebElement Basic;
+    @FindBy(how = How.XPATH, using = "//a[text()='Details']")
+    public static WebElement Details;
+    @FindBy(how = How.XPATH, using = "//a[text()='Attendance']")
+    public static WebElement Attendance;
+    @FindBy(how = How.XPATH, using = "//a[text()='Files']")
+    public static WebElement Files;
 
 
 }

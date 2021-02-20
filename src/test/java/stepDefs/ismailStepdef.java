@@ -7,6 +7,7 @@ import Utilities.ScenarioManager;
 import Utilities.WebElementMgr;
 import com.google.gson.internal.bind.util.ISO8601Utils;
 import io.cucumber.java.an.E;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -17,6 +18,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.w3c.dom.ls.LSOutput;
 
 import java.time.Duration;
@@ -52,7 +54,9 @@ public class ismailStepdef {
             ScenarioManager.getScenario().write("Clicked on " + elementNm);
         } catch (Exception e) {
             throw new Exception("Unable to click on " + elementNm + "; Error encountered:" + e.getMessage());
+
         }
+        Thread.sleep(500);
     }
 
 
@@ -182,13 +186,17 @@ public class ismailStepdef {
 
     }
 
-    @Then("i validate the {string} page pups up")
-    public void iValidateThePagePupsUp(String expected)throws Exception {
-        WebElement actualElement = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), "newPostionpage");
-        if (!actualElement.getText().equalsIgnoreCase(expected)){
-            throw new Exception("Fail; \n Expected :"+expected+" \n Found : "+actualElement.getText());
-        }
 
+    @Then("I validate that {string} element is visible on the page as ismail")
+    public void iValidateThatElementIsVisibleOnThePage(String element) {
+        WebElement validateElement = (WebElement) WebElementMgr.
+                getWebElement(PageObjectMgr.getCurrentPage(), element);
+        Assert.assertTrue(validateElement.isDisplayed()," The element "+element+" is not present on the page");
+        ScenarioManager.getScenario().write("The Element "+element+" is present on the page");
 
     }
+
+
+
+
 }
