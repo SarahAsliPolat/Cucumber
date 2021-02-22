@@ -4,6 +4,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
+import java.util.List;
+
 public class VusalaPage {
 
     @FindBy(how = How.XPATH, using = "//div[@class='links']/a")
@@ -107,4 +109,7 @@ public class VusalaPage {
     @FindBy(how = How.XPATH, using = "//label[contains(text(),'Termination Date:')]//following::div")
     public static WebElement InputBox;
 
+
+    @FindBy(how = How.  CSS, using = ".sorting_1")
+    public static List<WebElement> PositionsOfDistrictOffice;
 }

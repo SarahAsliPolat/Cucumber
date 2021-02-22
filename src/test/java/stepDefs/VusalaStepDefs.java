@@ -20,6 +20,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.Assertion;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 
 public class VusalaStepDefs {
@@ -52,8 +54,7 @@ public class VusalaStepDefs {
 
     @When("I click on {string} as Vusala")
     public void iClickOnAsVusala(String element) {
-        WebElement ClickElement = (WebElement) WebElementMgr.
-                getWebElement(PageObjectMgr.getCurrentPage(), element);
+        WebElement ClickElement = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), element);
 
         ClickElement.click();
 
@@ -78,8 +79,7 @@ public class VusalaStepDefs {
 
     @Then("I select {string} from {string} dropDownList")
     public void iSelectFromDropDown(String option, String element) {
-        WebElement dropDown = (WebElement) WebElementMgr.
-                getWebElement(PageObjectMgr.getCurrentPage(), element);
+        WebElement dropDown = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), element);
         Select select = new Select(dropDown);
         select.selectByVisibleText(option);
     }
@@ -113,10 +113,10 @@ public class VusalaStepDefs {
     @Then("I validate {string} text is displayed in {string} dropDown list")
     public void iValidateTextIsDisplayedInDropDownList(String text, String boxName) {
         Select select = new Select(driver.findElement(By.xpath(" //select[contains(@name,'" + boxName + "')]")));
-        WebElement elm= select.getFirstSelectedOption();
+        WebElement elm = select.getFirstSelectedOption();
         String selectedOption = elm.getText();
-        Assert.assertEquals(selectedOption,text);
-        System.out.println("Selected element: " + selectedOption+" is visible");
+        Assert.assertEquals(selectedOption, text);
+        System.out.println("Selected element: " + selectedOption + " is visible");
     }
 
 
@@ -125,7 +125,7 @@ public class VusalaStepDefs {
         WebElement validateElement = (WebElement) WebElementMgr.
                 getWebElement(PageObjectMgr.getCurrentPage(), element);
         Assert.assertTrue(validateElement.isDisplayed());
-        System.out.println("the text is :"+validateElement.getText());
+        System.out.println("the text is :" + validateElement.getText());
     }
 
     @When("I print staff info with staff ID")
@@ -134,20 +134,20 @@ public class VusalaStepDefs {
         Response response = null;
         RequestSpecification request = given();
 
-        request=request.pathParams( "staff_id",67986);
+        request = request.pathParams("staff_id", 67986);
         response = request.get(url);
         response.then().assertThat().statusCode(200);
         System.out.println(response.asString());
 
-        String expected_staffId="6535992";
-        String expected_location="High School";
-        String expected_room="786";
-        String actual_staffId=response.jsonPath().get("staff_id").toString();
-        String actual_location=response.jsonPath().get("location").toString();
-        String actual_room=response.jsonPath().get("room").toString();
-        Assert.assertEquals(actual_staffId,expected_staffId,"staff id doesn't match");
-        Assert.assertEquals(actual_location,expected_location,"location doesn't match");
-        Assert.assertEquals(actual_room,expected_room,"room doesn't match");
+        String expected_staffId = "6535992";
+        String expected_location = "High School";
+        String expected_room = "786";
+        String actual_staffId = response.jsonPath().get("staff_id").toString();
+        String actual_location = response.jsonPath().get("location").toString();
+        String actual_room = response.jsonPath().get("room").toString();
+        Assert.assertEquals(actual_staffId, expected_staffId, "staff id doesn't match");
+        Assert.assertEquals(actual_location, expected_location, "location doesn't match");
+        Assert.assertEquals(actual_room, expected_room, "room doesn't match");
 
     }
 
@@ -159,23 +159,23 @@ public class VusalaStepDefs {
         JSONObject body123 = new JSONObject();
         body123.put("name", "ali");
         body123.put("job", "isci");
-        request.header("Content-Type","application/json");
+        request.header("Content-Type", "application/json");
         request.body(body123.toJSONString());
-        response = request.request(Method.POST,url);
+        response = request.request(Method.POST, url);
         response.prettyPrint();
         response.getBody().asString();
         //status code validation
-        int statusCode =response.getStatusCode();
+        int statusCode = response.getStatusCode();
         response.then().assertThat().statusCode(201);
-        System.out.println("Status Code "+statusCode);
-        String actualName=response.jsonPath().get("name").toString();
-        String expectedName=body123.get("name").toString();
-        Assert.assertEquals(actualName,expectedName);
-        String actualJob=response.jsonPath().get("job").toString();
-        String expectedJob=body123.get("job").toString();
-        Assert.assertEquals(actualJob,expectedJob," expected job is not correct " );
-        System.out.println("actualJob = "+actualJob + "\nactualName= "+actualName);
-        System.out.println("expectedJob = "+expectedJob + "\nexpectedName= "+expectedName);
+        System.out.println("Status Code " + statusCode);
+        String actualName = response.jsonPath().get("name").toString();
+        String expectedName = body123.get("name").toString();
+        Assert.assertEquals(actualName, expectedName);
+        String actualJob = response.jsonPath().get("job").toString();
+        String expectedJob = body123.get("job").toString();
+        Assert.assertEquals(actualJob, expectedJob, " expected job is not correct ");
+        System.out.println("actualJob = " + actualJob + "\nactualName= " + actualName);
+        System.out.println("expectedJob = " + expectedJob + "\nexpectedName= " + expectedName);
     }
 
     @When("I put new information")
@@ -186,23 +186,23 @@ public class VusalaStepDefs {
         JSONObject body123 = new JSONObject();
         body123.put("name", "John");
         body123.put("job", "Tester");
-        request.header("Content-Type","application/json");
+        request.header("Content-Type", "application/json");
         request.body(body123.toJSONString());
-        response = request.request(Method.PUT,url);
+        response = request.request(Method.PUT, url);
         response.prettyPrint();
         response.getBody().asString();
         //status code validation
-        int statusCode =response.getStatusCode();
+        int statusCode = response.getStatusCode();
         response.then().assertThat().statusCode(200);
-        System.out.println("Status Code "+statusCode);
-        String actualName=response.jsonPath().get("name").toString();
-        String expectedName=body123.get("name").toString();
-        Assert.assertEquals(actualName,expectedName);
-        String actualJob=response.jsonPath().get("job").toString();
-        String expectedJob=body123.get("job").toString();
-        Assert.assertEquals(actualJob,expectedJob," expected job is not correct " );
-        System.out.println("actualJob = "+actualJob + "\nactualName= "+actualName);
-        System.out.println("expectedJob = "+expectedJob + "\nexpectedName= "+expectedName);
+        System.out.println("Status Code " + statusCode);
+        String actualName = response.jsonPath().get("name").toString();
+        String expectedName = body123.get("name").toString();
+        Assert.assertEquals(actualName, expectedName);
+        String actualJob = response.jsonPath().get("job").toString();
+        String expectedJob = body123.get("job").toString();
+        Assert.assertEquals(actualJob, expectedJob, " expected job is not correct ");
+        System.out.println("actualJob = " + actualJob + "\nactualName= " + actualName);
+        System.out.println("expectedJob = " + expectedJob + "\nexpectedName= " + expectedName);
 
     }
 
@@ -211,10 +211,22 @@ public class VusalaStepDefs {
         String url = "https://reqres.in/api/users/2";
         Response response = null;
         RequestSpecification request = given();
-        response = request.request(Method.DELETE,url);
+        response = request.request(Method.DELETE, url);
         System.out.println(response);
         response.then().assertThat().statusCode(204);
 
     }
+
+    @Then("I Validate only {string} Positions are displayed from {string}")
+    public void iValidateOnlyPositionsAreDisplayedFrom(String expected_str, String element_name ) {
+
+        List<WebElement> elements = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), element_name);
+
+        for (WebElement el:elements)
+
+            Assert.assertEquals(el.getText(), expected_str);
+
+    }
 }
+
 
