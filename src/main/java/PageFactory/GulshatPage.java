@@ -1,6 +1,4 @@
 package PageFactory;
-
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
@@ -191,6 +189,17 @@ public class GulshatPage {
 
     @FindBy(how = How.XPATH, using = "//select[@class='form-control']//following::option")
     public static List<WebElement> ReasonDropDownList;
+
+    //Gulshat_001
+    @FindBy(how = How.XPATH, using = "//p[contains(text(),'Applicants')]")
+    public static WebElement Applicants;
+
+    @FindBy(how = How.XPATH, using = "//select[@name='location_id' and @class='filter ml-4']")
+    public static WebElement selectLocation_dd;
+
+    @FindBy(how = How.CSS, using = ".sorting_1")
+    public static List<WebElement> locationColumn;
+
 
 
 }
