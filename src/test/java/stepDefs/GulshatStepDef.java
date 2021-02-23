@@ -21,11 +21,9 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.List;
-
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.requestSpecification;
+
 
 
 public class GulshatStepDef {
@@ -115,13 +113,10 @@ public class GulshatStepDef {
                 WebElement element = driver.findElement(By.xpath("//*[contains(text(),'" + expectedList.get(i) + "')]"));
                 System.out.println(element.getText());
             }
-
         } catch (Exception e) {
             Assert.fail(expectedList.get(i) + " is not present on the applicant information page");
         }
-
     }
-
 
     //RT-25
     @And("I enter {string} in the {string} as Gulshat")
@@ -138,6 +133,7 @@ public class GulshatStepDef {
                 getWebElement(PageObjectMgr.getCurrentPage(), element);
         Select select = new Select(dropDown);
         select.selectByVisibleText(option);
+
     }
 
     @And("I scroll down and click to {string} button as Gulshat")
@@ -178,11 +174,9 @@ public class GulshatStepDef {
                 throw new Exception(" Fail; \n Expected: " + expectedList.get(i) + " \n Found : " + dropDownList.get(i).getText());
             }
         }
-
     }
 
     // API
-
     @When("I create a user in post api")
     public void iCreateAUserInPostApi() {
         String url = "https://reqres.in/api/users";
@@ -223,7 +217,24 @@ public class GulshatStepDef {
         response.prettyPrint();
         response.then().assertThat().statusCode(204);
     }
+
+    //Gulshat_001
+    @Then("I validate {string} Applicants are displayed")
+    public void iValidateApplicantsAreDisplayed(String expectedName) throws Exception {
+        List<WebElement> webElementList = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), "locationColumn");
+        for (WebElement element : webElementList) {
+            System.out.println(element.getText());
+            if (element.getText().equals(expectedName)) {
+            } else {
+                throw new Exception(" Fail; \n Expected: " + expectedName + " \n Found : " + element.getText());
+            }
+        }
+    }
 }
+
+
+
+
 
 
 

@@ -1,8 +1,8 @@
 Feature: As an admin, when I click on Details tab,
   I should be able to see the data of selected staff.
 
-#  Background: User is logged in
-#    Given I logged in Gulshat
+  Background: User is logged in
+    Given I logged in Gulshat
 
   #RT-4
   Scenario: Gulshat test
@@ -85,7 +85,7 @@ Feature: As an admin, when I click on Details tab,
     And I click on "deleteButton" as Gulshat
     And I wait for "200" milliseconds
     And I click on "ok" as Gulshat
-    
+
   @Gulshat
 #RT-28
   Scenario: Reason and a dropdown list should appear
@@ -103,8 +103,18 @@ Feature: As an admin, when I click on Details tab,
   Scenario: Post Create
     When I create a user in post api
 
-    Scenario: Delete user
-      When I delete a user
+  Scenario: Delete user
+    When I delete a user
+
+  @Gulshat_001
+  Scenario:Validate Select Location filter on Applicatns page is working.
+    When I click on "Applicants" as Gulshat
+    And I wait for "3000" milliseconds
+    And I select "High School" from "selectLocation_dd" drop-down
+    Then I validate "High School" Applicants are displayed
+    And I select "Elementary" from "selectLocation_dd" drop-down
+    Then I validate "Elementary" Applicants are displayed
+
 
 
 
