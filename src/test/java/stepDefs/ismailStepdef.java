@@ -7,9 +7,11 @@ import Utilities.ScenarioManager;
 import Utilities.WebElementMgr;
 import com.google.gson.internal.bind.util.ISO8601Utils;
 import io.cucumber.java.an.E;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -17,6 +19,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.w3c.dom.ls.LSOutput;
 
 import java.time.Duration;
@@ -24,6 +27,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 public class ismailStepdef {
+    WebDriver driver = Driver.getDriver();
 
     @Given("I am on the {string} as ismail")
     public void i_am_on_the_as_ismail(String pageNm) throws Exception {
@@ -52,7 +56,9 @@ public class ismailStepdef {
             ScenarioManager.getScenario().write("Clicked on " + elementNm);
         } catch (Exception e) {
             throw new Exception("Unable to click on " + elementNm + "; Error encountered:" + e.getMessage());
+
         }
+        Thread.sleep(500);
     }
 
 
@@ -161,34 +167,65 @@ public class ismailStepdef {
 
     }
 
+    @Then("I validate the fields1 bellow on the Basic page")
+    public void iValidateTheDetailsBelow1(List<String> expectedList) throws Exception {
+        List<WebElement> actuelElement = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(),"BasicLable");
+
+            for (int i = 0; i < expectedList.size(); i++) {
 
 
-    @Then("i validate all the text on the position page")
-    public void iValidateAllTheTextOnThePositionPage(List<String >ExpectedList) throws Exception{
-       List< WebElement> actualElement = (List<WebElement>) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), "ptextPositions");
-       String Exp;
-       String Actu;
-
-        for (int i = 0; i <ExpectedList.size() ; i++) {
-           Exp= ExpectedList.get(i);
-           Actu=actualElement.get(i).getText();
-            System.out.println(("  Expected :"+Exp+" \n Found : "+Actu));
-           if (!Exp.equalsIgnoreCase(Actu)){
-               throw new Exception("Fail; \n Expected :"+Exp+" \n Found : "+Actu);
+           if (!actuelElement.get(i).getText().equalsIgnoreCase(expectedList.get(i))){
+               throw new Exception(" Fail; \n Expected: " + expectedList.get(i) + " \n Found : " + actuelElement.get(i).getText());
            }
+            }
 
 
+
+
+
+    }
+    @Then("I validate the fields2 bellow on the Basic page")
+    public void iValidateTheDetailsBelow2(List<String> expectedList) throws Exception {
+        int i = 0;
+
+        for (i = 0; i < expectedList.size(); i++) {
+            WebElement element = driver.findElement(By.xpath("//div[contains(text(),'"+expectedList.get(i)+"')]"));
+
+            if (!element.getText().equalsIgnoreCase(expectedList.get(i))){
+                throw new Exception(" Fail; \n Expected: " + expectedList.get(i) + " \n Found : " + element.getText());
+            }
         }
+
+
+
+
 
     }
 
-    @Then("i validate the {string} page pups up")
-    public void iValidateThePagePupsUp(String expected)throws Exception {
-        WebElement actualElement = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(), "newPostionpage");
-        if (!actualElement.getText().equalsIgnoreCase(expected)){
-            throw new Exception("Fail; \n Expected :"+expected+" \n Found : "+actualElement.getText());
+
+
+    @Then("I validate that {string} element is visible on the page as ismail")
+    public void iValidateThatElementIsVisibleOnThePage(String element) {
+        WebElement validateElement = (WebElement) WebElementMgr.
+                getWebElement(PageObjectMgr.getCurrentPage(), element);
+        Assert.assertTrue(validateElement.isDisplayed()," The element "+element+" is not present on the page");
+        ScenarioManager.getScenario().write("The Element "+element+" is present on the page");
+
+    }
+
+
+
+
+
+
+    @And("i validate the Field {string} on {string} as Ismail")
+    public void iValidateTheFieldOnAsIsmail(String Expected ,String Element) throws Exception {
+        WebElement actualElement = (WebElement) WebElementMgr.getWebElement(PageObjectMgr.getCurrentPage(),Element);
+        System.out.println(("  Expected :" + Expected + " \n Found : " + actualElement));
+        if (!Expected.equalsIgnoreCase(actualElement.getText())) {
+            throw new Exception("Fail; \n Expected :" + actualElement + " \n Found : " + actualElement);
+
+
         }
-
-
     }
 }
