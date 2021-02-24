@@ -14,7 +14,7 @@ Feature: A description
     Then I wait for "newHireButton" to be "visible" as ismail
 
 
-@ismail002
+@ismail001
   Scenario: Validate the Basic,Details, Attendance, Files Tabs are present on the staff page
     Given I am on the "IsmailPage" as ismail
     When I click on "StaffButton" as ismail
@@ -23,6 +23,26 @@ Feature: A description
     And I validate that "Details" element is visible on the page as ismail
     And I validate that "Attendance" element is visible on the page as ismail
     And I validate that "Files" element is visible on the page as ismail
+
+  @ismail002
+    #Validate All the labels: Status, Full Name, Location,
+      # Position, Phone Extension, Room, Email, Personal Email,
+        # Cell Phone and Home Address are present on the Basic page
+  Scenario: Validate all the labels on the Basic page
+    Given I am on the "IsmailPage" as ismail
+    Then I validate the fields1 bellow on the Basic page
+    |Status:|
+    |Position:|
+    |Phone Extension:|
+    |Room:|
+    |Email:|
+    |Personal Email:|
+    |Cell Phone:|
+    And I validate the fields2 bellow on the Basic page
+      |Full Name:|
+      |Location:|
+    And i validate the Field "Home Address:" on "BasicHomeAdress" as Ismail
+    And  i validate the Field "Edit Basic Info" on "EditBasicInfoButton" as Ismail
 
 
 

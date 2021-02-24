@@ -34,4 +34,18 @@ public class IsmailPage {
     public static WebElement Files;
 
 
+    //Ismail003_Validate all the labels on the Basic Page.
+
+     @FindBy(how = How.XPATH, using = "//div[contains(@class,'form-group col-sm-6')]//label")
+     public static List<WebElement> BasicLable;
+
+    @FindBy(how = How.XPATH, using = "//div[contains(@class, 'form-group col-sm-12')]//*[text() ='Home Address:']")
+    public static WebElement BasicHomeAdress;
+    @FindBy(how = How.XPATH, using = "//button[text() ='Edit Basic Info']")
+    public static WebElement EditBasicInfoButton;
+
+
+
+
+
 }
