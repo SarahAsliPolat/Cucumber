@@ -4,7 +4,9 @@ Feature: MCengiz tests
     Given I logged in MCengiz
 
 
-    @MCengiz
-    Scenario: MCengiz test
-      When I click on "newHireButton" as MCengiz
-      Then I wait for "3000" milliseconds
+  @MCengiz @MCengiz001
+  Scenario: Validate Position Filter in Applicants Page
+    Given I am on the "McengizPage"
+    When I click on "Applicants"
+    Then I validate that "Position" filter is working as expected
+    
